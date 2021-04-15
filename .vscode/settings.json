@@ -1,0 +1,11 @@
+{
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.formatOnSaveTimeout": 2000,
+    "prettier.printWidth": 200,
+    "prettier.tabWidth": 4
+}
