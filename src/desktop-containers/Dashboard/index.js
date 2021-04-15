@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
+import Sidebar from '../../components/Sidebar';
 
 class HomePage extends PureComponent {
     render() {
-        return <div>return</div>;
+        return <Sidebar />;
     }
 }
 
