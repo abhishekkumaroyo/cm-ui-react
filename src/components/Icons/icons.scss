@@ -1,0 +1,99 @@
+// .recent-search {
+//     height: 12px;
+//     width: 12px;
+//     vertical-align: middle;
+//     margin-right: 4px;
+//     position: relative;
+//     display: inline-block;
+//     background-image: url(recent-search.svg);
+//     background-repeat: no-repeat;
+//     background-position: 0 0;
+//     &.trending-search {
+//         background-image: url(trending-search.svg);
+//         background-position: 0px 2px;
+//     }
+// }
+
+.dashboardIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/dashboard.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.propertyIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/propertyIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.bookingsIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/bookingsIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.inventoryIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/inventoryIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.pricingIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/pricingIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.ratePlansIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/ratePlansIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.channelsIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/channelsIcon.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
