@@ -10,7 +10,7 @@ export const SidebarContainer = styled.div`
 
 export const SidebarContent = styled.div`
     padding: 15px 10px;
-    height: 56px;
+    // height: 56px;
     // color: #808080;
     font-family: 'Inter', sans-serif;
     font-style: normal;

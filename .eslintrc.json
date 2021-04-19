@@ -5,10 +5,7 @@
         "node": true,
         "jest": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -16,10 +13,26 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-vars": 2,
+        "no-undef": 2,
+        "semi": 2,
+        "react/prop-types": 0,
+        "react/jsx-no-bind": [
+            2,
+            {
+                "allowArrowFunctions": true
+            }
+        ],
+        "react/jsx-no-duplicate-props": 2,
+        "no-console": 0,
+        "react/display-name": 0,
+        "lines-between-class-members": [2, "always"],
+        "arrow-spacing": 2,
+        "no-duplicate-imports": 2,
+        "no-unused-vars": 1,
+        "no-constant-condition": 1
     }
 }
