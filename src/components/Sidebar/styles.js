@@ -24,6 +24,9 @@ export const SidebarContent = styled.div`
     font-weight: 500;
     color: rgb(128, 128, 128);
     box-shadow: none;
+    :hover {
+        background-color: #f6f7f8;
+    }
 `;
 
 export const IconContainer = styled.div`
@@ -33,4 +36,5 @@ export const IconContainer = styled.div`
 
 export const TextContainer = styled.div`
     width: 170px;
+    //color: red;
 `;

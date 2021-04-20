@@ -2,31 +2,47 @@
 import React, { Component } from 'react';
 import { BookingsIcon, DashboardIcon, PropertyIcon, InventoryIcon, PricingIcon, RatePlansIcon, ChannelsIcon } from '../Icons/icons.js';
 import { IconContainer, SidebarContainer, SidebarContent, TextContainer } from './styles.js';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams, NavLink } from 'react-router-dom';
+import './style.scss';
 
 class Sidebar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            //menuItem: 'dashboard'
+        };
+    }
+
     render() {
         return (
             <SidebarContainer>
-                <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                <NavLink
+                    to="/dashboard"
+                    style={{ textDecoration: 'none' }}
+                    activeStyle={{
+                        fontWeight: 'bold',
+                        backgroundColor: 'rgb(254, 238, 237)',
+                        color: 'rgb(238, 42, 36)',
+                        boxShadow: 'rgb(238 42 36) 3px 0px inset'
+                    }}>
                     <SidebarContent>
                         <IconContainer>
                             <DashboardIcon />
                         </IconContainer>
                         <TextContainer>Dashboard</TextContainer>
                     </SidebarContent>
-                </Link>
+                </NavLink>
 
-                <Link to="/property" style={{ textDecoration: 'none' }}>
+                <NavLink to="/property" style={{ textDecoration: 'none' }}>
                     <SidebarContent>
                         <IconContainer>
                             <PropertyIcon />
                         </IconContainer>
                         <TextContainer>Property</TextContainer>
                     </SidebarContent>
-                </Link>
+                </NavLink>
 
-                <Link to="/bookings" style={{ textDecoration: 'none' }}>
+                <Link to="/bookings" style={{ textDecoration: 'none' }} activeStyle>
                     <SidebarContent>
                         <IconContainer>
                             <BookingsIcon />

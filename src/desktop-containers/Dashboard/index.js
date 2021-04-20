@@ -1,19 +1,45 @@
 /* eslint-disable no-unused-vars */
-import React, { PureComponent } from 'react';
-import BodyContent from '../../components/BodyContent';
-
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
-import { Redirect } from 'react-router';
-//import Sidebar from '../../components/Sidebar';
+import BookingsBody from '../../components/BookingsBody/index.js';
+import ChannelsBody from '../../components/ChannelsBody/index.js';
+import DashboardBody from '../../components/DashboardBody/index.js';
+import InventoryBody from '../../components/InventoryBody/index.js';
+import PricingBody from '../../components/PricingBody/index.js';
+import PropertyBody from '../../components/PropertyBody/index.js';
+import RatePlansBody from '../../components/RatePlansBody/index.js';
+import Sidebar from '../../components/Sidebar/index.js';
+import { BodyContainer, MainContainer } from './styles.js';
 
-class HomePage extends PureComponent {
+class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuItem: 'dashboard'
+        };
+    }
+
+    componentDidMount() {}
+
     render() {
         return (
-            <div>
-                <BodyContent />
-            </div>
+            <BodyContainer>
+                <Sidebar />
+                <MainContainer>
+                    <Switch>
+                        <Route path="/dashboard" component={DashboardBody} />
+
+                        <Route path="/bookings" component={BookingsBody} selected="bookings" />
+                        <Route path="/property" component={PropertyBody} />
+                        <Route path="/inventory" component={InventoryBody} />
+                        <Route path="/pricing" component={PricingBody} />
+                        <Route path="/rateplans" component={RatePlansBody} />
+                        <Route path="/channels" component={ChannelsBody} />
+                    </Switch>
+                </MainContainer>
+            </BodyContainer>
         );
     }
 }
 
-export default HomePage;
+export default Dashboard;

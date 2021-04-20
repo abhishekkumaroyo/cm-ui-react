@@ -4,13 +4,15 @@ import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams 
 
 import {} from '../Icons/icons.js';
 
+import ContentMenu from '../ContentMenu';
+
 //import {} from './styles.js';
 
 class DashboardBody extends Component {
     render() {
         return (
             <div>
-                dasboard Body
+                <ContentMenu />
                 <span></span>
             </div>
         );

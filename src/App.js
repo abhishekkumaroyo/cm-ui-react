@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './desktop-containers/Login';
+//import Dashboard from './desktop-containers/Dashboard';
 import Dashboard from './desktop-containers/Dashboard';
 
 function App() {
-    const [token, setToken] = useState(false);
+    const [token, setToken] = useState(true);
 
     if (!token) {
         return <Login setToken={setToken} />;
