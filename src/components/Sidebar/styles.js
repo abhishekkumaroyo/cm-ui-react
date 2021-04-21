@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 export const SidebarContainer = styled.div`
     border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -6,6 +6,7 @@ export const SidebarContainer = styled.div`
     z-index: 9;
     display: flex;
     flex-direction: column;
+    //position: fixed;
 `;
 
 export const SidebarContent = styled.div`
@@ -27,6 +28,13 @@ export const SidebarContent = styled.div`
     :hover {
         background-color: #f6f7f8;
     }
+    ${(props) =>
+        props.styley === true &&
+        css`
+            font-weight: bold;
+            color: rgb(238, 42, 36);
+            box-shadow: rgb(238 42 36) 3px 0px inset;
+        `}
 `;
 
 export const IconContainer = styled.div`

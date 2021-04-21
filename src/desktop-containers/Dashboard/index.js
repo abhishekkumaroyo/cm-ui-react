@@ -14,9 +14,7 @@ import { BodyContainer, MainContainer } from './styles.js';
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            menuItem: 'dashboard'
-        };
+        this.state = {};
     }
 
     componentDidMount() {}
@@ -29,7 +27,7 @@ class Dashboard extends Component {
                     <Switch>
                         <Route path="/dashboard" component={DashboardBody} />
 
-                        <Route path="/bookings" component={BookingsBody} selected="bookings" />
+                        <Route path="/bookings" component={BookingsBody} />
                         <Route path="/property" component={PropertyBody} />
                         <Route path="/inventory" component={InventoryBody} />
                         <Route path="/pricing" component={PricingBody} />
