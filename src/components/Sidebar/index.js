@@ -3,7 +3,7 @@ import React, { Component, useEffect } from 'react';
 import { SidebarContainer } from './styles.js';
 
 import list from './const';
-import ListItem from './item.js';
+import ListItem from './ListItem.js';
 
 export const Sidebar = () => {
     return (

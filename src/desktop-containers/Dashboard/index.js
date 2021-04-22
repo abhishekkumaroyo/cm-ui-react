@@ -26,7 +26,6 @@ class Dashboard extends Component {
                 <MainContainer>
                     <Switch>
                         <Route path="/dashboard" component={DashboardBody} />
-
                         <Route path="/bookings" component={BookingsBody} />
                         <Route path="/property" component={PropertyBody} />
                         <Route path="/inventory" component={InventoryBody} />

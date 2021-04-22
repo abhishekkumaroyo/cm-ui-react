@@ -44,5 +44,7 @@ export const IconContainer = styled.div`
 
 export const TextContainer = styled.div`
     width: 170px;
+
+    display: ${(props) => (props.visible ? 'block' : 'none')};
     //color: red;
 `;
