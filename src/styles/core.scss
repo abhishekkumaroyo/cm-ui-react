@@ -1,0 +1,79 @@
+// Bootstrap grid system pulled out of v3.3.5
+@import './fonts/fonts.scss';
+@import './bootstrap/variables.scss';
+@import './variables.scss';
+
+// General
+html {
+    font-family: $font-family-base;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: $font-family-base !important;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $text-color;
+    background-color: #fefefe;
+}
+
+* {
+    box-sizing: border-box;
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
+    &:focus {
+        outline: 0;
+    }
+}
+
+// Form elements
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 16px;
+    line-height: inherit;
+}
+
+// Links
+a,
+.spanclick {
+    color: $link-color;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        color: $primary-500;
+        text-decoration: none;
+    }
+}
+
+a.styless-link {
+    color: inherit;
+    font-weight: inherit;
+}
+
+svg[data-uri] {
+    cursor: pointer;
+}
+
+section {
+    margin: 30px 0;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+        // Tablet, Desktop
+        margin: 40px 0;
+    }
+
+    @media (min-width: $screen-lg-min) {
+        // Large desktop
+        margin: 64px 0;
+    }
+}

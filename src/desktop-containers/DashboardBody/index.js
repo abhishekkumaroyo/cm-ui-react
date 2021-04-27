@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
 
-import {} from '../Icons/icons.js';
+import {} from '../../components/Icons/icons.js';
 
-import ContentMenu from '../ContentMenu';
-import Button from '../Button/index.js';
+import ContentMenu from '../../components/ContentMenu';
+import Button from '../../components/Button/index.js';
+import Searchbar from '../../components/Searchbar/index.js';
 
 //import {} from './styles.js';
 
@@ -25,6 +26,7 @@ class DashboardBody extends Component {
                     <Button message="Add a Room" onButtonClick={this.addRoom} type="white" />
                     <Button message="Add a photo" onButtonClick={this.addPhoto} />
                 </ContentMenu>
+                {/* <Searchbar /> */}
             </div>
         );
     }

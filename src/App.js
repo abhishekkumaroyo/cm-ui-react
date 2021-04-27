@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './desktop-containers/Login';
-import Dashboard from './desktop-containers/Dashboard';
+import HomePage from './desktop-containers/HomePage';
 import './App.scss';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
     return (
         <Switch>
-            <Route path="/" component={Dashboard} />;
+            <Route path="/" component={HomePage} />;
         </Switch>
     );
 }
