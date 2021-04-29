@@ -18,8 +18,8 @@ const GET = (url, params, successCB, errorCb, headers) => {
     axios
         .get(baseURL + url, config)
         .then((response) => {
-            console.log(response);
-            console.log('succcess sub');
+            // console.log(response);
+            // console.log('succcess sub');
             if (successCB) successCB(response.data);
         })
         .catch((error) => {

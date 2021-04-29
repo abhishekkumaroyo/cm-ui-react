@@ -5,7 +5,7 @@ export const ButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
 
-    margin: 10px;
+    margin: auto 10px;
     padding: 0 10px;
     font-size: 16px;
     font-weight: 600;
@@ -13,13 +13,17 @@ export const ButtonContainer = styled.div`
     cursor: pointer;
     font-family: 'Inter', sans-serif;
 
-    min-height: 50px;
+    height: 50px;
     background: #ee2a24;
     border: 1px solid #ee2a24;
     border-radius: 6px;
     box-sizing: border-box;
     color: #ffffff;
-    min-width: 140px;
+
+    @media (min-width: 992px) {
+        min-width: 140px;
+        //float: left;
+    }
 
     ${(props) =>
         props.type == 'white' &&

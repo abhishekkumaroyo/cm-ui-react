@@ -3,13 +3,13 @@ import { INVALID_SEARCH, SEARCH, TOGGLE_SIDEBAR } from '../actions/actionTypes';
 const initialState = {
     sidebar: false,
     check: 'check',
-    property: null,
+    property: null, // property related info like name, images etc
     searchError: false,
-    searchErrorMessage: null
+    searchErrorMessage: null,
+    mapping: null // mapping realted info (both hotel and room mapping)
 };
 
 export default function (state = initialState, action) {
-    //console.log('here');
     switch (action.type) {
         case TOGGLE_SIDEBAR:
             return {
@@ -19,7 +19,8 @@ export default function (state = initialState, action) {
         case SEARCH:
             return {
                 ...state,
-                property: action.payload,
+                property: action.payload.data.OHM,
+                mapping: action.payload.data.hotelData,
                 searchError: false
             };
         case INVALID_SEARCH:

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const MenuContainer = styled.div`
     width: 100%;
     background-color: #f3ffe3;
-    min-height: 70px;
+    min-height: 100px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     display: flex;

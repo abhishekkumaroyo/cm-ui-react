@@ -8,7 +8,7 @@ import {} from '../Icons/icons.js';
 import { Inputbox, SearchbarContainer } from './styles.js';
 
 import { connect } from 'react-redux';
-import { searchAction } from '../../actions/homeActions';
+import { searchAction } from '../../actions/searchActions';
 
 class Searchbar extends Component {
     constructor(props) {
@@ -31,13 +31,11 @@ class Searchbar extends Component {
 
     render() {
         return (
-            <div>
-                <SearchbarContainer>
-                    <Inputbox placeholder="Search Property" type="text" onChange={this.onInputChange} />
-                    <Button message="Search" onButtonClick={this.onSeachClick} />
-                    {this.props.children}
-                </SearchbarContainer>
-            </div>
+            <SearchbarContainer>
+                <Inputbox placeholder="Search Property" type="text" onChange={this.onInputChange} />
+                <Button message="Search" onButtonClick={this.onSeachClick} />
+                {this.props.children}
+            </SearchbarContainer>
         );
     }
 }
