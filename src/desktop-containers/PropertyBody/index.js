@@ -37,6 +37,10 @@ class PropertyBody extends Component {
                     <Route path="/property/pictures">
                         <div>pictures</div>
                     </Route>
+
+                    <Route path="/property/room">
+                        <div>room</div>
+                    </Route>
                 </Switch>
             </div>
         );
