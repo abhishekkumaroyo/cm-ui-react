@@ -33,8 +33,15 @@ export const saveSearchResult = (data) => {
 export const errorFetchingSearch = (error) => {
     console.log('error');
     console.log(error.response);
-    return {
-        type: INVALID_SEARCH,
-        payload: error.response.data
-    };
+    if (error.response) {
+        return {
+            type: INVALID_SEARCH,
+            payload: error.response.data
+        };
+    } else {
+        return {
+            type: INVALID_SEARCH,
+            payload: 'server error'
+        };
+    }
 };
