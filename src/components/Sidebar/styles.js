@@ -29,7 +29,7 @@ export const SidebarContent = styled.div`
         background-color: #f6f7f8;
     }
     ${(props) =>
-        props.styley === true &&
+        props.styled === true &&
         css`
             font-weight: bold;
             color: rgb(238, 42, 36);

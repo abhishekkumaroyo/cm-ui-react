@@ -1,20 +1,19 @@
 import styled from 'styled-components/macro';
 
-export const SearchError = styled.div`
-    //width: 100%;
-    margin: auto 10px;
+export const BasicDetailsColumn = styled.div`
+    padding: 0px 7.5px;
+    position: relative;
+    min-height: 1px;
 
-    color: red;
-
-    //position: fixed;
+    @media (min-width: 992px) {
+        width: 50%;
+        float: left;
+    }
 `;
 
-export const StyledImage = styled.img`
-    margin: 5px;
-    height: 100px;
-`;
+export const ShowMapButton = styled.div``;
 
-export const TableDataName = styled.td`
+export const DataName = styled.td`
     width: 25%;
     border: 0;
     border-bottom: 1px solid #f2f5f8;
@@ -25,7 +24,7 @@ export const TableDataName = styled.td`
     font-weight: 700;
 `;
 
-export const TableDataContent = styled.td`
+export const DataContent = styled.td`
     width: 75%;
     border: 0;
     border-bottom: 1px solid #f2f5f8;

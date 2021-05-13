@@ -10,7 +10,7 @@ import { toggleSidebar } from '../../actions/homeActions';
 
 export const ListItem = (props) => {
     let match = useRouteMatch(props.url);
-    const [matchh, setMatch] = useState(false);
+    const [matched, setMatch] = useState(false);
 
     useEffect(() => {
         if (match) {
@@ -26,7 +26,7 @@ export const ListItem = (props) => {
 
     return (
         <Link to={props.url} style={{ textDecoration: 'none' }}>
-            <SidebarContent styley={matchh}>
+            <SidebarContent styled={matched}>
                 <IconContainer onClick={toggleSide}>{props.icon}</IconContainer>
                 <TextContainer visible={props.home.sidebar}>{props.name}</TextContainer>
             </SidebarContent>

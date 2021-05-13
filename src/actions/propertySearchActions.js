@@ -1,4 +1,4 @@
-import { SEARCH, INVALID_SEARCH } from './actionTypes';
+import { SAVE_PROPERTY_SEARCH, INVALID_PROPERTY_SEARCH, START_FETCHING_PROPERTY_DATA } from './actionTypes';
 
 import RESTApi from '../api/RestAPI';
 
@@ -10,6 +10,8 @@ export const searchAction = ({ searchInput }) => (dispatch) => {
         clientId: 1
     };
 
+    dispatch(startFetchingSearchData());
+
     RESTApi.GET(
         'search',
         params,
@@ -17,30 +19,36 @@ export const searchAction = ({ searchInput }) => (dispatch) => {
             if (data) dispatch(saveSearchResult(data));
         },
         (error) => {
+            console.log(error);
             dispatch(errorFetchingSearch(error));
         }
     );
 };
 
+export const startFetchingSearchData = () => {
+    return {
+        type: START_FETCHING_PROPERTY_DATA
+    };
+};
+
 export const saveSearchResult = (data) => {
     console.log(data);
     return {
-        type: SEARCH,
+        type: SAVE_PROPERTY_SEARCH,
         payload: data
     };
 };
 
 export const errorFetchingSearch = (error) => {
-    console.log('error');
-    console.log(error.response);
+    // console.log(error.response);
     if (error.response) {
         return {
-            type: INVALID_SEARCH,
+            type: INVALID_PROPERTY_SEARCH,
             payload: error.response.data
         };
     } else {
         return {
-            type: INVALID_SEARCH,
+            type: INVALID_PROPERTY_SEARCH,
             payload: 'server error'
         };
     }

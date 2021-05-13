@@ -22,7 +22,6 @@ export const ButtonContainer = styled.div`
 
     @media (min-width: 992px) {
         min-width: 140px;
-        //float: left;
     }
 
     ${(props) =>

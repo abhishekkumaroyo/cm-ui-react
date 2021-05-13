@@ -14,13 +14,18 @@ export default function ContentNav() {
                     </Link>
                 </NavItems>
                 <NavItems>
-                    <Link to={`${match.url}/pictures`} style={{ textDecoration: 'none' }}>
-                        Pictures
+                    <Link to={`${match.url}/images`} style={{ textDecoration: 'none' }}>
+                        Images
                     </Link>
                 </NavItems>
                 <NavItems>
                     <Link to={`${match.url}/room`} style={{ textDecoration: 'none' }}>
                         Room
+                    </Link>
+                </NavItems>
+                <NavItems>
+                    <Link to={`${match.url}/contact`} style={{ textDecoration: 'none' }}>
+                        Contact
                     </Link>
                 </NavItems>
             </NavContainer>

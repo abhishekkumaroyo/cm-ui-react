@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
-import Button from '../Button/index.js';
+import Button, { LoaderButton } from '../Button/index.js';
 
 import {} from '../Icons/icons.js';
 
 import { Inputbox, SearchbarContainer } from './styles.js';
 
 import { connect } from 'react-redux';
-import { searchAction } from '../../actions/searchActions';
+import { searchAction } from '../../actions/propertySearchActions';
 
 class Searchbar extends Component {
     constructor(props) {
@@ -33,7 +33,8 @@ class Searchbar extends Component {
         return (
             <SearchbarContainer>
                 <Inputbox placeholder="Search Property" type="text" onChange={this.onInputChange} />
-                <Button message="Search" onButtonClick={this.onSeachClick} />
+                {this.props.propertySearch.searchFetching ? <LoaderButton /> : <Button message="Search" onButtonClick={this.onSeachClick} />}
+
                 {this.props.children}
             </SearchbarContainer>
         );
@@ -41,7 +42,8 @@ class Searchbar extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    home: state.home
+    home: state.home,
+    propertySearch: state.propertySearch
 });
 
 export default connect(mapStateToProps, {

@@ -15,6 +15,10 @@ export const RatePlansIcon = () => <span className="ratePlansIcon"></span>;
 
 export const ChannelsIcon = () => <span className="channelsIcon"></span>;
 
+export const LeftArrowIcon = () => <span className="leftArrowIcon"></span>;
+
+export const RightArrowIcon = () => <span className="rightArrowIcon"></span>;
+
 // export const UsersIcon = (props) => <span className={props.sticky ? 'usersIcon stickyIcon' : 'usersIcon'}></span>;
 
 // export const MagnifierIcon = (props) => <span className={props.error ? 'magnifierIcon redIcon' : 'magnifierIcon'}></span>;
