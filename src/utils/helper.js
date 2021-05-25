@@ -30,3 +30,33 @@ export function getKeyValueFromObject(obj) {
     }
     return null;
 }
+
+/*
+    used to display the values (for bool, array) on the UI
+*/
+export function displayObjectValue(val) {
+    if (typeof val === 'boolean') {
+        console.log(val.toString());
+        return val.toString();
+    } else if (Array.isArray(val)) {
+        var temp = '';
+        for (var i = 0; i < val.length; i++) {
+            if (i == val.length - 1) {
+                temp = temp + val[i];
+            } else {
+                temp = temp + val[i];
+                temp = temp + ', ';
+            }
+        }
+        console.log(temp);
+        return temp;
+    } else {
+        return val;
+    }
+}
+
+export function camelCaseToSentenceCase(val) {
+    var result = val.replace(/([A-Z])/g, ' $1');
+    var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+    return finalResult;
+}

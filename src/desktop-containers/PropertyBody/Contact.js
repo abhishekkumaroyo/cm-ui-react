@@ -7,8 +7,8 @@ export default function Contact(props) {
     const [contactInfos, setContactInfos] = useState([]);
 
     useEffect(() => {
-        if (props.propertySearch.property && props.propertySearch.property.content && props.propertySearch.property.content.contactInfos) {
-            setContactInfos(props.propertySearch.property.content.contactInfos);
+        if (props.propertySearch.property && props.propertySearch.property.contactInfoList) {
+            setContactInfos(props.propertySearch.property.contactInfoList);
             // const contactInfosTemp = [
             //     {
             //         type: 'reservations',

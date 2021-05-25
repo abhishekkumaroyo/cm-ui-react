@@ -28,6 +28,21 @@ export default function ContentNav() {
                         Contact
                     </Link>
                 </NavItems>
+                <NavItems>
+                    <Link to={`${match.url}/policies`} style={{ textDecoration: 'none' }}>
+                        Policies
+                    </Link>
+                </NavItems>
+                <NavItems>
+                    <Link to={`${match.url}/amenities`} style={{ textDecoration: 'none' }}>
+                        Amenities
+                    </Link>
+                </NavItems>
+                <NavItems>
+                    <Link to={`${match.url}/unit`} style={{ textDecoration: 'none' }}>
+                        Unit
+                    </Link>
+                </NavItems>
             </NavContainer>
         </div>
     );

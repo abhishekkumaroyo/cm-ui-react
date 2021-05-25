@@ -20,15 +20,22 @@ import {
     ButtonContainer
 } from './stylesImages';
 
+import { TableDataName, TableDataContent } from './styles';
+//import { BasicDetailsColumn } from './stylesBasicDetails';
+import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+
 export default function Images(props) {
     const [pictures, setPictures] = useState([]);
     const [picIndex, setIndex] = useState(0);
     const [numberOfImages, setNumberOfImages] = useState(0);
 
     useEffect(() => {
-        if (props.propertySearch.property && props.propertySearch.property.content && props.propertySearch.property.content.images) {
-            setPictures(props.propertySearch.property.content.images);
-            setNumberOfImages(props.propertySearch.property.content.images.length);
+        console.log('test1');
+        if (props.propertySearch.property && props.propertySearch.property.images) {
+            setPictures(props.propertySearch.property.images);
+            setNumberOfImages(props.propertySearch.property.images.length);
+            console.log(numberOfImages);
+            console.log('tes21');
         }
     });
 
@@ -78,7 +85,17 @@ export default function Images(props) {
                             </div>
                         </ImageSliderContainer>
                         <ImageDetailsContent>
-                            <Row>
+                            <table>
+                                <tbody>
+                                    {Object.keys(pictures[picIndex]).map((item, index) => (
+                                        <tr key={index}>
+                                            <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
+                                            <TableDataContent>{displayObjectValue(pictures[picIndex][item])}</TableDataContent>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            {/* <Row>
                                 <RowLeft>Description</RowLeft>
                                 <RowRight>{pictures[picIndex].description ? `${pictures[picIndex].description}` : 'NA'}</RowRight>
                             </Row>
@@ -109,7 +126,7 @@ export default function Images(props) {
                             <Row>
                                 <RowLeft>UUID</RowLeft>
                                 <RowRight>{pictures[picIndex].uuid ? `${pictures[picIndex].uuid}` : 'NA'}</RowRight>
-                            </Row>
+                            </Row> */}
                         </ImageDetailsContent>
                     </PropertyCard>
                 ) : (

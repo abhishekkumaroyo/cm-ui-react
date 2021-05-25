@@ -1,16 +1,6 @@
 import styled from 'styled-components/macro';
 
-export const SearchError = styled.div`
-    margin: auto 10px;
-    color: red;
-`;
-
-export const StyledImage = styled.img`
-    margin: 5px;
-    height: 100px;
-`;
-
-export const TableDataName = styled.td`
+export const DataName = styled.td`
     width: 25%;
     border: 0;
     border-bottom: 1px solid #f2f5f8;
@@ -21,7 +11,7 @@ export const TableDataName = styled.td`
     font-weight: 700;
 `;
 
-export const TableDataContent = styled.td`
+export const DataContent = styled.td`
     width: 75%;
     border: 0;
     border-bottom: 1px solid #f2f5f8;
@@ -29,4 +19,12 @@ export const TableDataContent = styled.td`
     vertical-align: middle;
     padding: 5px;
     line-height: 1.42857;
+`;
+
+export const DescriptionIndex = styled.span`
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: auto;
+    background-color: ${(props) => (props.selected ? 'yellow' : '0')};
+    font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
 `;

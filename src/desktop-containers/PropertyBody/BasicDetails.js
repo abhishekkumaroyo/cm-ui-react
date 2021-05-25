@@ -8,48 +8,34 @@ import PropertyCard from '../../components/PropertyCard';
 import { PropertyColumn, StyledImage } from './styles';
 import { DataContent, DataName, BasicDetailsColumn, ShowMapButton } from './stylesBasicDetails';
 
-import { getcmName } from '../../utils/helper';
+import { camelCaseToSentenceCase, getcmName } from '../../utils/helper';
+import PropertyDetails from '../../components/PropertyDetailsCard';
+import PropertyAddressCard from '../../components/PropertyAddressCard';
+import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
 
 export default function BasicDetails(props) {
-    //let contactInfos = [];
-    //const [propertyInfo, setPropertyInfo] = useState({});
     const [contactInfos, setContactInfos] = useState([]);
     const [propertyInstructions, setPropertyInstructions] = useState([]);
     const [propertyAddress, setPropertyAddress] = useState({});
 
-    //let propertyAddress = {};
-
     useEffect(() => {
         if (props.propertySearch.property) {
             const property = props.propertySearch.property;
+
             //console.log(getcmName(5));
-            if (property.content && property.content.contactInfos) {
-                setContactInfos(property.content.contactInfos);
+            if (property.contactInfoList) {
+                setContactInfos(property.contactInfoList);
             }
             if (property.rules && property.rules.propertyInstructions) {
                 setPropertyInstructions(property.rules.propertyInstructions);
             }
-
-            if (Object.prototype.hasOwnProperty.call(property, 'locationInfo')) {
-                let tempObject = {};
-                const locationInfo = property.locationInfo;
-                if (Object.prototype.hasOwnProperty.call(locationInfo, 'geoLocation')) {
-                    tempObject['Latitude'] = locationInfo.geoLocation.latitude;
-                    tempObject['Longitude'] = locationInfo.geoLocation.longitude;
-                }
-                if (locationInfo.hasOwnProperty('physicalLocation') && locationInfo.physicalLocation.hasOwnProperty('address')) {
-                    const physicalAddress = locationInfo.physicalLocation.address;
-                    tempObject['Line 1'] = physicalAddress.line1;
-                    tempObject['Line 2'] = physicalAddress.line2;
-                    tempObject['City'] = physicalAddress.city;
-                    tempObject['State'] = physicalAddress.state;
-                    tempObject['Postal Code'] = physicalAddress.postalCode;
-                    tempObject['Country Code'] = physicalAddress.countryCode;
-                }
-                setPropertyAddress(tempObject);
-            }
         }
     }, [props.propertySearch]);
+
+    const getChannelName = (id) => {
+        console.log(getcmName(id));
+        return getcmName(id);
+    };
 
     return (
         <div>
@@ -57,47 +43,13 @@ export default function BasicDetails(props) {
                 {props.propertySearch.property ? (
                     <div>
                         <PropertyCard title="Property Info">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <DataName>Property Name</DataName>
-                                        <DataContent>
-                                            {Object.prototype.hasOwnProperty.call(props.propertySearch.property, 'propertyName')
-                                                ? `${props.propertySearch.property.propertyName}`
-                                                : 'NA'}
-                                        </DataContent>
-                                    </tr>
-                                    <tr>
-                                        <DataName>Property Id</DataName>
-                                        <DataContent>
-                                            {props.propertySearch.property.propertyId ? `${props.propertySearch.property.propertyId}` : 'NA'}
-                                        </DataContent>
-                                    </tr>
-                                    <tr>
-                                        <DataName>Property URL</DataName>
-                                        <DataContent>
-                                            {props.propertySearch.property.propertyUrl ? `${props.propertySearch.property.propertyUrl}` : 'NA'}
-                                        </DataContent>
-                                    </tr>
-                                    <tr>
-                                        <DataName>Property sp</DataName>
-                                        <DataContent>
-                                            {props.propertySearch.property.propertySp ? `${props.propertySearch.property.propertySp}` : 'NA'}
-                                        </DataContent>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <PropertyDetails property={props.propertySearch.property} />
                         </PropertyCard>
 
                         <PropertyCard title="Property Address">
                             <table>
                                 <tbody>
-                                    {Object.keys(propertyAddress).map((info, index) => (
-                                        <tr key={index}>
-                                            <DataName>{info}</DataName>
-                                            <DataContent>{propertyAddress[info]}</DataContent>
-                                        </tr>
-                                    ))}
+                                    <PropertyAddressCard property={props.propertySearch.property} />
                                 </tbody>
                             </table>
                             <ShowMapButton>
@@ -133,11 +85,12 @@ export default function BasicDetails(props) {
                             {props.propertySearch.mapping.map((item, index) => (
                                 <div key={index}>
                                     <span>cmId: {item.cmId} | </span> <span>cmHotelId: {item.cmHotelId} | </span>
+                                    <div>{getChannelName(item.cmId).name}</div>
                                 </div>
                             ))}
                         </PropertyCard>
                         <PropertyCard title="Property images">
-                            {props.propertySearch.property.content.images.map((item, index) => (
+                            {props.propertySearch.property.images.map((item, index) => (
                                 <span key={index}>
                                     <StyledImage src={item.url} />
                                 </span>
@@ -154,7 +107,7 @@ export default function BasicDetails(props) {
                                     <div style={{ display: 'inline-grid' }}>
                                         {Object.keys(instr).map((instructionKey, instructionIndex) => (
                                             <div key={instructionIndex}>
-                                                <span>{instructionKey} : </span>
+                                                <span>{camelCaseToSentenceCase(instructionKey)} : </span>
                                                 <span>{instr[instructionKey]}</span>
                                                 <br />
                                             </div>
@@ -162,6 +115,13 @@ export default function BasicDetails(props) {
                                     </div>
                                 </div>
                             ))}
+                        </PropertyCard>
+                        <PropertyCard title="Policies">
+                            <PropertyPoliciesCard property={props.propertySearch.property} />
+                            <Link to="/property/policies">
+                                <br />
+                                <div>View Policy details</div>
+                            </Link>
                         </PropertyCard>
                     </div>
                 ) : null}

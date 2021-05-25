@@ -6,7 +6,7 @@ export class PropertyCard extends Component {
         return (
             <CardContainer>
                 <CardTitleContainer>{this.props.title}</CardTitleContainer>
-                <CardContentContainer>{this.props.children}</CardContentContainer>
+                <CardContentContainer height={this.props.height}>{this.props.children}</CardContentContainer>
             </CardContainer>
         );
     }

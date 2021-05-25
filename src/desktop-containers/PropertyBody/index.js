@@ -12,6 +12,9 @@ import ContentNav from '../../components/ContentNav';
 import BasicDetails from './BasicDetails';
 import Pictures from './Images';
 import Contact from './Contact';
+import Policies from './Policies';
+import Amenities from './Amenities';
+import Unit from './Unit';
 
 class PropertyBody extends Component {
     componentDidMount() {}
@@ -46,6 +49,18 @@ class PropertyBody extends Component {
 
                     <Route path="/property/contact">
                         <Contact propertySearch={this.props.propertySearch} />
+                    </Route>
+
+                    <Route path="/property/policies">
+                        <Policies propertySearch={this.props.propertySearch} />
+                    </Route>
+
+                    <Route path="/property/amenities">
+                        <Amenities propertySearch={this.props.propertySearch} />
+                    </Route>
+
+                    <Route path="/property/unit">
+                        <Unit propertySearch={this.props.propertySearch} />
                     </Route>
                 </Switch>
             </div>
