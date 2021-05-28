@@ -30,12 +30,9 @@ export default function Images(props) {
     const [numberOfImages, setNumberOfImages] = useState(0);
 
     useEffect(() => {
-        console.log('test1');
         if (props.propertySearch.property && props.propertySearch.property.images) {
             setPictures(props.propertySearch.property.images);
             setNumberOfImages(props.propertySearch.property.images.length);
-            console.log(numberOfImages);
-            console.log('tes21');
         }
     });
 

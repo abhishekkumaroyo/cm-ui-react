@@ -35,6 +35,8 @@ export function getKeyValueFromObject(obj) {
     used to display the values (for bool, array) on the UI
 */
 export function displayObjectValue(val) {
+    // add a try catch block to check for the undefined values
+
     if (typeof val === 'boolean') {
         console.log(val.toString());
         return val.toString();

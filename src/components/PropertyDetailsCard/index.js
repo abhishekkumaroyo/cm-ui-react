@@ -10,36 +10,73 @@ export default function PropertyDetailsCard(props) {
 
     useEffect(() => {
         let infoObject = {};
-        infoObject['externalPropertyId'] = props.property.externalPropertyId;
-        infoObject['propertyType'] = props.property.propertyType;
-        infoObject['hasMultipleSellableUnitsOrNot'] = props.property.hasMultipleSellableUnitsOrNot;
-        infoObject['currencyCode'] = props.property.currencyCode;
-        infoObject['languageCodes'] = props.property.languageCodes; // it is an array separate it
-        setPropertyDetails(infoObject);
-
         let descriptions = {};
-        if (props.property.propertyDescriptions && props.property.propertyDescriptions.length >= 1) {
-            descriptions = props.property.propertyDescriptions[selectedDesc];
+        if (!props.property.parentId) {
+            infoObject['externalPropertyId'] = props.property.externalPropertyId;
+            infoObject['propertyType'] = props.property.propertyType;
+            infoObject['hasMultipleSellableUnitsOrNot'] = props.property.hasMultipleSellableUnitsOrNot;
+            infoObject['currencyCode'] = props.property.currencyCode;
+            infoObject['languageCodes'] = props.property.languageCodes; // it is an array separate it
+            setPropertyDetails(infoObject);
 
             var numberOfDesc = [];
-            for (var i = 0; i < props.property.propertyDescriptions.length; i++) {
-                numberOfDesc.push(i);
+            if (props.property.propertyDescriptions && props.property.propertyDescriptions.length >= 1) {
+                descriptions = props.property.propertyDescriptions[selectedDesc];
+
+                for (var i = 0; i < props.property.propertyDescriptions.length; i++) {
+                    numberOfDesc.push(i);
+                }
             }
             setNumberOfDesc(numberOfDesc);
-        }
-        let tempObject = {};
-        tempObject['name'] = descriptions.name;
-        tempObject['summary'] = descriptions.summary;
-        tempObject['headline'] = descriptions.headline;
-        tempObject['directions'] = descriptions.directions;
-        tempObject['ownerInfo'] = descriptions.ownerInfo;
-        tempObject['guestAccess'] = descriptions.guestAccess;
-        tempObject['guestBookMessage'] = descriptions.guestBookMessage;
-        tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
-        tempObject['languageCode'] = descriptions.languageCode;
 
-        setPropertyDescriptions(tempObject);
-    }, [props.propertySearch, selectedDesc]);
+            let tempObject = {};
+            tempObject['name'] = descriptions.name;
+            tempObject['summary'] = descriptions.summary;
+            tempObject['headline'] = descriptions.headline;
+            tempObject['directions'] = descriptions.directions;
+            tempObject['ownerInfo'] = descriptions.ownerInfo;
+            tempObject['guestAccess'] = descriptions.guestAccess;
+            tempObject['guestBookMessage'] = descriptions.guestBookMessage;
+            tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
+            tempObject['languageCode'] = descriptions.languageCode;
+
+            setPropertyDescriptions(tempObject);
+        } else {
+            infoObject = {};
+            infoObject['unitExternalId'] = props.property.unitExternalId;
+            infoObject['parentId'] = props.property.parentId;
+            infoObject['type'] = props.property.type;
+            infoObject['subType'] = props.property.subType;
+            infoObject['sellable'] = props.property.sellable;
+            infoObject['commonSpace'] = props.property.commonSpace;
+            setPropertyDetails(infoObject);
+
+            descriptions = {};
+            var numberOfDes = [];
+
+            if (props.property.description && props.property.description.length >= 1) {
+                descriptions = props.property.description[selectedDesc];
+
+                for (i = 0; i < props.property.description.length; i++) {
+                    numberOfDes.push(i);
+                }
+            }
+            setNumberOfDesc(numberOfDes);
+
+            let tempObject = {};
+            tempObject['name'] = descriptions.name;
+            tempObject['summary'] = descriptions.summary;
+            tempObject['headline'] = descriptions.headline;
+            tempObject['directions'] = descriptions.directions;
+            tempObject['ownerInfo'] = descriptions.ownerInfo;
+            tempObject['guestAccess'] = descriptions.guestAccess;
+            tempObject['guestBookMessage'] = descriptions.guestBookMessage;
+            tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
+            tempObject['languageCode'] = descriptions.languageCode;
+
+            setPropertyDescriptions(tempObject);
+        }
+    }, [props.property, selectedDesc]);
 
     return (
         <table>

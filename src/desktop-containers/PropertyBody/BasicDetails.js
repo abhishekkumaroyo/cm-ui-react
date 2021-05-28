@@ -100,7 +100,7 @@ export default function BasicDetails(props) {
                             </Link>
                         </PropertyCard>
 
-                        <PropertyCard title="Rules">
+                        <PropertyCard title="Instructions">
                             {propertyInstructions.map((instr, index) => (
                                 <div key={index} style={{ marginBottom: '10px' }}>
                                     <h5 style={{ display: 'inline' }}>{index + 1}.) &emsp; </h5>

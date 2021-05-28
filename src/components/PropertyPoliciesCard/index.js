@@ -8,8 +8,10 @@ export default function PropertyPoliciesCard(props) {
     useEffect(() => {
         if (props.property.policies) {
             setPropertyPolicies(props.property.policies);
+        } else {
+            setPropertyPolicies({});
         }
-    }, [props.propertySearch]);
+    }, [props.property]);
 
     return (
         <table>
