@@ -57,6 +57,10 @@ export function displayObjectValue(val) {
     }
 }
 
+/*
+    Use this function to display strings in sentence case which were originally in camel case
+    This is used to displyaing keys like ownerInfo
+*/
 export function camelCaseToSentenceCase(val) {
     var result = val.replace(/([A-Z])/g, ' $1');
     var finalResult = result.charAt(0).toUpperCase() + result.slice(1);

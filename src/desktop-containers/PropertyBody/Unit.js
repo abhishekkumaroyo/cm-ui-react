@@ -1,37 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import PropertyCard from '../../components/PropertyCard';
 import PropertyDetailsCard from '../../components/PropertyDetailsCard';
+import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
+import PropertyRulesCard from '../../components/PropertyRulesCard';
 import { BasicDetailsColumn } from './stylesBasicDetails';
+import { UnitName } from './stylesUnit';
 
 export default function Unit(props) {
-    const [unit, setUnit] = useState(0);
+    const [unitNumberOne, setUnitNumberOne] = useState(0);
+    const [unitNumberTwo, setUnitNumberTwo] = useState(-1);
+    const [unit, setUnit] = useState({});
 
-    const selectUnit = (unit) => {
-        setUnit(unit);
+    const selectUnitOne = (unit) => {
+        setUnitNumberOne(unit);
+        setUnitNumberTwo(-1);
     };
+
+    const selectUnitTwo = (unit) => {
+        setUnitNumberTwo(unit);
+    };
+
+    useEffect(() => {
+        if (props.propertySearch.property) {
+            if (unitNumberTwo == -1) {
+                setUnit(props.propertySearch.property.units[unitNumberOne]);
+            } else {
+                setUnit(props.propertySearch.property.units[unitNumberOne].units[unitNumberTwo]);
+            }
+        }
+    }, [unitNumberOne, unitNumberTwo]);
+
+    if (!props.propertySearch.property) {
+        return <PropertyCard title="UNIT">Enter correct property id</PropertyCard>;
+    }
 
     return (
         <div>
-            <PropertyCard title="Units available">
-                {props.propertySearch.property.units.map((unit, ind) => (
-                    <div key={ind} onClick={() => selectUnit(ind)}>
-                        {unit.type}
-                    </div>
-                ))}
+            <PropertyCard title="Units available (select any unit and any sub-unit)">
+                <div>
+                    <b>Level 1: </b>
+                    <br />
+                    {props.propertySearch.property.units.map((unit, ind) => (
+                        <UnitName key={ind} onClick={() => selectUnitOne(ind)} selected={ind == unitNumberOne}>
+                            {unit.type}
+                        </UnitName>
+                    ))}
+                </div>
+                <div>
+                    <b>Level 2: </b>
+                    <br />
+                    {props.propertySearch.property.units[unitNumberOne].units
+                        ? props.propertySearch.property.units[unitNumberOne].units.map((unit, ind) => (
+                              <UnitName key={ind} onClick={() => selectUnitTwo(ind)} selected={ind == unitNumberTwo}>
+                                  {unit.type}
+                              </UnitName>
+                          ))
+                        : null}
+                </div>
             </PropertyCard>
             <div>
                 <BasicDetailsColumn>
                     <PropertyCard title="Unit Info">
-                        <PropertyDetailsCard property={props.propertySearch.property.units[unit]}></PropertyDetailsCard>
+                        <PropertyDetailsCard property={unit}></PropertyDetailsCard>
                     </PropertyCard>
                 </BasicDetailsColumn>
                 <BasicDetailsColumn>
-                    <PropertyCard title="Policies">
-                        <PropertyPoliciesCard property={props.propertySearch.property.units[unit]}></PropertyPoliciesCard>
+                    <PropertyCard title="Policies (select a policy)">
+                        <PropertyPoliciesCard property={unit}></PropertyPoliciesCard>
                     </PropertyCard>
                     <PropertyCard title="Rules">
-                        <PropertyPoliciesCard property={props.propertySearch.property.units[unit]}></PropertyPoliciesCard>
+                        <PropertyRulesCard property={unit} />
+                    </PropertyCard>
+                    <PropertyCard title="Instructions">
+                        <PropertyInstructionsCard property={unit} />
                     </PropertyCard>
                 </BasicDetailsColumn>
             </div>

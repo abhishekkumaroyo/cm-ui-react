@@ -92,38 +92,6 @@ export default function Images(props) {
                                     ))}
                                 </tbody>
                             </table>
-                            {/* <Row>
-                                <RowLeft>Description</RowLeft>
-                                <RowRight>{pictures[picIndex].description ? `${pictures[picIndex].description}` : 'NA'}</RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>Tags</RowLeft>
-                                <RowRight>{pictures[picIndex].tags ? `${pictures[picIndex].tags.map((tag, index) => tag)}` : 'NA'}</RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>Status</RowLeft>
-                                <RowRight>{pictures[picIndex].status ? `${pictures[picIndex].status}` : 'NA'}</RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>Primary</RowLeft>
-                                <RowRight>
-                                    {Object.prototype.hasOwnProperty.call(pictures[picIndex], 'isPrimary') ? `${pictures[picIndex].isPrimary}` : 'NA'}
-                                </RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>Priority</RowLeft>
-                                <RowRight>
-                                    {Object.prototype.hasOwnProperty.call(pictures[picIndex], 'priority') ? `${pictures[picIndex].priority}` : 'NA'}
-                                </RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>URL</RowLeft>
-                                <RowRight>{pictures[picIndex].url ? `${pictures[picIndex].url}` : 'NA'}</RowRight>
-                            </Row>
-                            <Row>
-                                <RowLeft>UUID</RowLeft>
-                                <RowRight>{pictures[picIndex].uuid ? `${pictures[picIndex].uuid}` : 'NA'}</RowRight>
-                            </Row> */}
                         </ImageDetailsContent>
                     </PropertyCard>
                 ) : (

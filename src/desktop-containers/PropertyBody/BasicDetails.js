@@ -5,13 +5,16 @@ import Button from '../../components/Button';
 
 import PropertyCard from '../../components/PropertyCard';
 
-import { PropertyColumn, StyledImage } from './styles';
+import { PropertyColumn, StyledImage, TableDataName, TableDataContent } from './styles';
 import { DataContent, DataName, BasicDetailsColumn, ShowMapButton } from './stylesBasicDetails';
 
-import { camelCaseToSentenceCase, getcmName } from '../../utils/helper';
+import { camelCaseToSentenceCase, getcmName, displayObjectValue } from '../../utils/helper';
 import PropertyDetails from '../../components/PropertyDetailsCard';
 import PropertyAddressCard from '../../components/PropertyAddressCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
+import PolicyDisplay from '../../components/PolicyDisplay';
+import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
+import PropertyRulesCard from '../../components/PropertyRulesCard';
 
 export default function BasicDetails(props) {
     const [contactInfos, setContactInfos] = useState([]);
@@ -101,22 +104,12 @@ export default function BasicDetails(props) {
                         </PropertyCard>
 
                         <PropertyCard title="Instructions">
-                            {propertyInstructions.map((instr, index) => (
-                                <div key={index} style={{ marginBottom: '10px' }}>
-                                    <h5 style={{ display: 'inline' }}>{index + 1}.) &emsp; </h5>
-                                    <div style={{ display: 'inline-grid' }}>
-                                        {Object.keys(instr).map((instructionKey, instructionIndex) => (
-                                            <div key={instructionIndex}>
-                                                <span>{camelCaseToSentenceCase(instructionKey)} : </span>
-                                                <span>{instr[instructionKey]}</span>
-                                                <br />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
+                            <PropertyInstructionsCard property={props.propertySearch.property} />
                         </PropertyCard>
-                        <PropertyCard title="Policies">
+                        <PropertyCard title="Rules">
+                            <PropertyRulesCard property={props.propertySearch.property} />
+                        </PropertyCard>
+                        <PropertyCard title="Policies (select a policy)">
                             <PropertyPoliciesCard property={props.propertySearch.property} />
                             <Link to="/property/policies">
                                 <br />
