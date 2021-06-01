@@ -32,11 +32,11 @@ class PropertyBody extends Component {
 
                 <Switch>
                     <Route exact path="/property">
-                        <BasicDetails propertySearch={this.props.propertySearch} />
+                        <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/basic">
-                        <BasicDetails propertySearch={this.props.propertySearch} />
+                        <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/images">
@@ -60,7 +60,7 @@ class PropertyBody extends Component {
                     </Route>
 
                     <Route path="/property/unit">
-                        <Unit propertySearch={this.props.propertySearch} />
+                        <Unit propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
                 </Switch>
             </div>
@@ -70,7 +70,8 @@ class PropertyBody extends Component {
 
 const mapStateToProps = (state) => ({
     home: state.home,
-    propertySearch: state.propertySearch
+    propertySearch: state.propertySearch,
+    propertyLanguage: state.propertyLanguage
 });
 
 export default connect(mapStateToProps)(PropertyBody);

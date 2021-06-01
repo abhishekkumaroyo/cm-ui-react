@@ -38,7 +38,7 @@ export function displayObjectValue(val) {
     // add a try catch block to check for the undefined values
 
     if (typeof val === 'boolean') {
-        console.log(val.toString());
+        //console.log(val.toString());
         return val.toString();
     } else if (Array.isArray(val)) {
         var temp = '';
@@ -50,7 +50,7 @@ export function displayObjectValue(val) {
                 temp = temp + ', ';
             }
         }
-        console.log(temp);
+        //console.log(temp);
         return temp;
     } else {
         return val;

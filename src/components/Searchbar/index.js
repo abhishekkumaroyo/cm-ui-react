@@ -3,8 +3,6 @@ import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
 import Button, { LoaderButton } from '../Button/index.js';
 
-import {} from '../Icons/icons.js';
-
 import { Inputbox, SearchbarContainer } from './styles.js';
 
 import { connect } from 'react-redux';

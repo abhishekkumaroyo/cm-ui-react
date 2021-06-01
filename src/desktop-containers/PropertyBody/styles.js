@@ -30,3 +30,14 @@ export const TableDataContent = styled.td`
     padding: 5px;
     line-height: 1.42857;
 `;
+
+export const LanguageRow = styled.div`
+    display: flex;
+`;
+
+export const Language = styled.div`
+    padding: 3px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
+`;

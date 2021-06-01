@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
 import PropertyCard from '../../components/PropertyCard';
 import PropertyDetailsCard from '../../components/PropertyDetailsCard';
+import PropertyImagesCard from '../../components/PropertyImagesCard';
 import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
 import PropertyRulesCard from '../../components/PropertyRulesCard';
@@ -22,6 +24,8 @@ export default function Unit(props) {
     };
 
     useEffect(() => {
+        console.log(props.language);
+        console.log('props.propertyLanguage');
         if (props.propertySearch.property) {
             if (unitNumberTwo == -1) {
                 setUnit(props.propertySearch.property.units[unitNumberOne]);
@@ -29,7 +33,7 @@ export default function Unit(props) {
                 setUnit(props.propertySearch.property.units[unitNumberOne].units[unitNumberTwo]);
             }
         }
-    }, [unitNumberOne, unitNumberTwo]);
+    }, [unitNumberOne, unitNumberTwo, props.language]);
 
     if (!props.propertySearch.property) {
         return <PropertyCard title="UNIT">Enter correct property id</PropertyCard>;
@@ -46,6 +50,8 @@ export default function Unit(props) {
                             {unit.type}
                         </UnitName>
                     ))}
+                    <br />
+                    <br />
                 </div>
                 <div>
                     <b>Level 2: </b>
@@ -66,8 +72,14 @@ export default function Unit(props) {
                     </PropertyCard>
                 </BasicDetailsColumn>
                 <BasicDetailsColumn>
+                    <PropertyCard title="Images">
+                        <PropertyImagesCard property={unit} />
+                    </PropertyCard>
+                    <PropertyCard title="Amenities">
+                        <PropertyAmenitiesCard property={unit} />
+                    </PropertyCard>
                     <PropertyCard title="Policies (select a policy)">
-                        <PropertyPoliciesCard property={unit}></PropertyPoliciesCard>
+                        <PropertyPoliciesCard property={unit} />
                     </PropertyCard>
                     <PropertyCard title="Rules">
                         <PropertyRulesCard property={unit} />
