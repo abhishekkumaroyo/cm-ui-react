@@ -9,6 +9,7 @@ import PricingBody from '../PricingBody/index.js';
 import PropertyBody from '../PropertyBody/index.js';
 import RatePlansBody from '../RatePlansBody/index.js';
 import Sidebar from '../../components/Sidebar/index.js';
+import Navbar from '../../components/Navbar/index.js';
 import { BodyContainer, MainContainer } from './styles.js';
 
 class HomePage extends Component {
@@ -22,6 +23,7 @@ class HomePage extends Component {
     render() {
         return (
             <BodyContainer>
+                <Navbar />
                 <Sidebar />
                 <MainContainer>
                     <Switch>

@@ -15,7 +15,7 @@ import Contact from './Contact';
 import Policies from './Policies';
 import Amenities from './Amenities';
 import Unit from './Unit';
-
+import MappingDetails from './MappingDetails';
 class PropertyBody extends Component {
     componentDidMount() {}
 
@@ -43,8 +43,8 @@ class PropertyBody extends Component {
                         <Pictures propertySearch={this.props.propertySearch} />
                     </Route>
 
-                    <Route path="/property/room">
-                        <div>room</div>
+                    <Route path="/property/mapping">
+                        <MappingDetails propertySearch={this.props.propertySearch} />
                     </Route>
 
                     <Route path="/property/contact">

@@ -88,6 +88,10 @@ export default function BasicDetails(props) {
                                     <div>{getChannelName(item.cmId).name}</div>
                                 </div>
                             ))}
+                            <Link to="/property/mapping">
+                                <br />
+                                <div>Click to know More</div>
+                            </Link>
                         </PropertyCard>
                         <PropertyCard title="Property images">
                             {props.propertySearch.property.images.map((item, index) => (
