@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
-import { DataContent, DataName, DescriptionIndex } from './styles';
+import { camelCaseToSentenceCase, displayLanguageText, displayObjectValue } from '../../utils/helper';
+import { DataContent, DataName } from './styles';
 
 export default function PropertyDetailsCard(props) {
     const [propertyDetails, setPropertyDetails] = useState({});
     const [propertyDescriptions, setPropertyDescriptions] = useState({});
-    const [numberOfDesc, setNumberOfDesc] = useState([]);
-    const [selectedDesc, setSelectedDesc] = useState(0);
+    // const [numberOfDesc, setNumberOfDesc] = useState([]);
+    // const [selectedDesc, setSelectedDesc] = useState(0);
 
     useEffect(() => {
         let infoObject = {};
         let descriptions = {};
         if (!props.property.parentId) {
+            // case of property
             infoObject['externalPropertyId'] = props.property.externalPropertyId;
             infoObject['propertyType'] = props.property.propertyType;
             infoObject['hasMultipleSellableUnitsOrNot'] = props.property.hasMultipleSellableUnitsOrNot;
@@ -19,15 +20,7 @@ export default function PropertyDetailsCard(props) {
             infoObject['languageCodes'] = props.property.languageCodes; // it is an array separate it
             setPropertyDetails(infoObject);
 
-            var numberOfDesc = [];
-            if (props.property.propertyDescriptions && props.property.propertyDescriptions.length >= 1) {
-                descriptions = props.property.propertyDescriptions[selectedDesc];
-
-                for (var i = 0; i < props.property.propertyDescriptions.length; i++) {
-                    numberOfDesc.push(i);
-                }
-            }
-            setNumberOfDesc(numberOfDesc);
+            descriptions = props.property.propertyDescriptions;
 
             let tempObject = {};
             tempObject['name'] = descriptions.name;
@@ -38,10 +31,10 @@ export default function PropertyDetailsCard(props) {
             tempObject['guestAccess'] = descriptions.guestAccess;
             tempObject['guestBookMessage'] = descriptions.guestBookMessage;
             tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
-            tempObject['languageCode'] = descriptions.languageCode;
 
             setPropertyDescriptions(tempObject);
         } else {
+            // case of unit
             infoObject = {};
             infoObject['unitExternalId'] = props.property.unitExternalId;
             infoObject['parentId'] = props.property.parentId;
@@ -49,19 +42,11 @@ export default function PropertyDetailsCard(props) {
             infoObject['subType'] = props.property.subType;
             infoObject['sellable'] = props.property.sellable;
             infoObject['commonSpace'] = props.property.commonSpace;
+
             setPropertyDetails(infoObject);
 
             descriptions = {};
-            var numberOfDes = [];
-
-            if (props.property.description && props.property.description.length >= 1) {
-                descriptions = props.property.description[selectedDesc];
-
-                for (i = 0; i < props.property.description.length; i++) {
-                    numberOfDes.push(i);
-                }
-            }
-            setNumberOfDesc(numberOfDes);
+            descriptions = props.property.description;
 
             let tempObject = {};
             tempObject['name'] = descriptions.name;
@@ -72,11 +57,10 @@ export default function PropertyDetailsCard(props) {
             tempObject['guestAccess'] = descriptions.guestAccess;
             tempObject['guestBookMessage'] = descriptions.guestBookMessage;
             tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
-            tempObject['languageCode'] = descriptions.languageCode;
 
             setPropertyDescriptions(tempObject);
         }
-    }, [props.property, selectedDesc]);
+    }, [props.property, props.language]);
 
     return (
         <table>
@@ -87,26 +71,18 @@ export default function PropertyDetailsCard(props) {
                         <DataContent>{displayObjectValue(propertyDetails[info])}</DataContent>
                     </tr>
                 ))}
-                <div>
-                    <h4>Descriptions</h4>
-                </div>
                 <tr>
-                    <DataName>
-                        Descriptions <span>(Select any number)</span>
-                    </DataName>
-                    <DataContent>
-                        {numberOfDesc.map((index) => (
-                            <DescriptionIndex key={index} onClick={() => setSelectedDesc(index)} selected={index == selectedDesc}>
-                                {index + 1}
-                            </DescriptionIndex>
-                        ))}
-                    </DataContent>
+                    <td>
+                        <div>
+                            <h4>Descriptions</h4>
+                        </div>
+                    </td>
                 </tr>
 
                 {Object.keys(propertyDescriptions).map((info, index) => (
                     <tr key={index}>
                         <DataName>{camelCaseToSentenceCase(info)}</DataName>
-                        <DataContent>{propertyDescriptions[info]}</DataContent>
+                        <DataContent>{displayLanguageText(propertyDescriptions[info], props.language.language)}</DataContent>
                     </tr>
                 ))}
             </tbody>

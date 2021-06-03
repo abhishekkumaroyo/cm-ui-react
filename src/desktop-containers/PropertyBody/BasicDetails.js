@@ -1,32 +1,107 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { ShowMapButton } from './stylesBasicDetails';
+
+import { getcmName } from '../../utils/helper';
+
 import Button from '../../components/Button';
-
-import PropertyCard from '../../components/PropertyCard';
-
-import { PropertyColumn, StyledImage, TableDataName, TableDataContent, Language, LanguageRow } from './styles';
-import { DataContent, DataName, BasicDetailsColumn, ShowMapButton } from './stylesBasicDetails';
-
-import { camelCaseToSentenceCase, getcmName, displayObjectValue } from '../../utils/helper';
-import PropertyDetails from '../../components/PropertyDetailsCard';
+import PropertyDetailsCard from '../../components/PropertyDetailsCard';
 import PropertyAddressCard from '../../components/PropertyAddressCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
-import PolicyDisplay from '../../components/PolicyDisplay';
 import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
 import PropertyRulesCard from '../../components/PropertyRulesCard';
 import PropertyImagesCard from '../../components/PropertyImagesCard';
 import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
-
-import { languages } from '../../constants/languages';
+import PropertyCard from '../../components/PropertyCard';
 import PropertyHeader from '../../components/PropertyHeader';
-
-// import {changeLanguage} from '../../actions/propertyLanguageAction';
+import { PropertyColumn } from './styles';
 
 export default function BasicDetails(props) {
     const [contactInfos, setContactInfos] = useState([]);
-    const [propertyInstructions, setPropertyInstructions] = useState([]);
-    const [propertyAddress, setPropertyAddress] = useState({});
+
+    const temp = {
+        externalPropertyId: 'AT-4824-10',
+        propertyType: 'BUNGALOW',
+        hasMultipleSellableUnitsOrNot: true,
+        currencyCode: 'EUR',
+        languageCodes: ['en', 'de'],
+        propertyDescriptions: {
+            name: {
+                texts: [
+                    {
+                        value: 'dog',
+                        languageCode: 'en'
+                    },
+                    {
+                        value: 'perro',
+                        languageCode: 'es'
+                    }
+                ]
+            },
+            summary: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    },
+                    {
+                        value: 'spanish name',
+                        languageCode: 'es'
+                    }
+                ]
+            },
+            headline: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            },
+            directions: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            },
+            ownerInfo: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            },
+            guestAccess: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            },
+            guestBookMessage: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            },
+            additionalHouseRules: {
+                texts: [
+                    {
+                        value: 'name',
+                        languageCode: 'en'
+                    }
+                ]
+            }
+        }
+    };
 
     useEffect(() => {
         if (props.propertySearch.property) {
@@ -34,9 +109,6 @@ export default function BasicDetails(props) {
 
             if (property.contactInfoList) {
                 setContactInfos(property.contactInfoList);
-            }
-            if (property.rules && property.rules.propertyInstructions) {
-                setPropertyInstructions(property.rules.propertyInstructions);
             }
         }
     }, [props.propertySearch, props.language]);
@@ -53,15 +125,19 @@ export default function BasicDetails(props) {
         <div>
             <PropertyHeader language={props.language} />
 
-            <BasicDetailsColumn>
+            <PropertyColumn>
                 <PropertyCard title="Property Info">
-                    <PropertyDetails property={props.propertySearch.property} />
+                    <PropertyDetailsCard property={temp} language={props.language} />
                 </PropertyCard>
 
                 <PropertyCard title="Property Address">
                     <table>
                         <tbody>
-                            <PropertyAddressCard property={props.propertySearch.property} />
+                            <tr>
+                                <td>
+                                    <PropertyAddressCard property={props.propertySearch.property} />
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <ShowMapButton>
@@ -85,8 +161,9 @@ export default function BasicDetails(props) {
                         <div>View Full Contact Details</div>
                     </Link>
                 </PropertyCard>
-            </BasicDetailsColumn>
-            <BasicDetailsColumn>
+            </PropertyColumn>
+
+            <PropertyColumn>
                 <PropertyCard title="Property mappings">
                     {props.propertySearch.mapping.map((item, index) => (
                         <div key={index}>
@@ -117,7 +194,7 @@ export default function BasicDetails(props) {
                         <div>View Policy details</div>
                     </Link>
                 </PropertyCard>
-            </BasicDetailsColumn>
+            </PropertyColumn>
         </div>
     );
 }

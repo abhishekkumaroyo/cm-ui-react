@@ -28,20 +28,31 @@ export default function PropertyPoliciesCard(props) {
         <table>
             <tbody>
                 {Object.keys(propertyPolicies).map((info, index) => (
-                    <PolicyName
-                        key={index}
-                        onClick={() => {
-                            selectPolicy(info);
-                        }}
-                        selected={policyName == info}>
-                        {index + 1}.) {camelCaseToSentenceCase(info)}
-                    </PolicyName>
+                    <tr key={index}>
+                        <td>
+                            <PolicyName
+                                onClick={() => {
+                                    selectPolicy(info);
+                                }}
+                                selected={policyName == info}>
+                                {index + 1}.) {camelCaseToSentenceCase(info)}
+                            </PolicyName>
+                        </td>
+                    </tr>
                 ))}
-                <br />
+                <tr>
+                    <td>
+                        <br />
+                    </td>
+                </tr>
                 {selectedPolicy ? (
-                    <PropertyCard title={camelCaseToSentenceCase(policyName)}>
-                        <PolicyDisplay policy={selectedPolicy} type={policyName} />
-                    </PropertyCard>
+                    <tr>
+                        <td>
+                            <PropertyCard title={camelCaseToSentenceCase(policyName)}>
+                                <PolicyDisplay policy={selectedPolicy} type={policyName} />
+                            </PropertyCard>
+                        </td>
+                    </tr>
                 ) : null}
             </tbody>
         </table>

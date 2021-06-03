@@ -2,26 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import { LeftArrowIcon, RightArrowIcon } from '../../components/Icons/icons';
 import PropertyCard from '../../components/PropertyCard';
-import {
-    ImagesColumn,
-    ImagesContainer,
-    ImageTile,
-    ImageDetailsContainer,
-    ImageSliderContainer,
-    Left,
-    ImageSide,
-    Right,
-    ImageDetailsContent,
-    DataName,
-    DataContent,
-    Row,
-    RowLeft,
-    RowRight,
-    ButtonContainer
-} from './stylesImages';
+import { ImagesContainer, ImageTile, ImageSliderContainer, Left, ImageSide, Right, ImageDetailsContent, ButtonContainer } from './stylesImages';
 
-import { TableDataName, TableDataContent } from './styles';
-//import { BasicDetailsColumn } from './stylesBasicDetails';
+import { TableDataName, TableDataContent, PropertyColumn } from './styles';
 import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
 
 export default function Images(props) {
@@ -54,16 +37,12 @@ export default function Images(props) {
     };
 
     if (!props.propertySearch.property) {
-        return (
-            <ImagesColumn>
-                <PropertyCard title="Property Images">Enter correct property id</PropertyCard>
-            </ImagesColumn>
-        );
+        return <PropertyCard title="Property Images">Enter correct property id</PropertyCard>;
     }
 
     return (
         <div>
-            <ImagesColumn>
+            <PropertyColumn>
                 {pictures[picIndex] ? (
                     <PropertyCard title="Image Details">
                         <ImageSliderContainer>
@@ -97,8 +76,9 @@ export default function Images(props) {
                 ) : (
                     <PropertyCard title="Property Images">No Images found</PropertyCard>
                 )}
-            </ImagesColumn>
-            <ImagesColumn>
+            </PropertyColumn>
+
+            <PropertyColumn>
                 <PropertyCard title="Image Gallary">
                     <ImagesContainer>
                         <h4>Total Images: {numberOfImages}</h4>
@@ -122,7 +102,7 @@ export default function Images(props) {
                         <Button message="Remove an Image"></Button>
                     </ButtonContainer>
                 </PropertyCard>
-            </ImagesColumn>
+            </PropertyColumn>
         </div>
     );
 }

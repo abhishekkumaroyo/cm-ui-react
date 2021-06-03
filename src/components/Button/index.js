@@ -1,6 +1,5 @@
 import React from 'react';
 import LoaderDots from '../LoaderDots';
-//import {} from '../../desktop-containers/Login/styles';
 
 import { ButtonContainer } from './styles';
 
@@ -14,7 +13,7 @@ export const Button = (props) => {
 };
 
 export const LoaderButton = (props) => {
-    const { loading, loaderProps } = props;
+    // const { loading, loaderProps } = props;
     return (
         <ButtonContainer type={props.type}>
             <LoaderDots />

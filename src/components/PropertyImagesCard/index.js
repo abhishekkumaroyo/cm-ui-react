@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+
 import { StyledImage } from './styles';
 
 export default function PropertyImagesCard(props) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+import { camelCaseToSentenceCase } from '../../utils/helper';
 
 export default function PropertyInstructionsCard(props) {
     const [propertyInstructions, setPropertyInstructions] = useState([]);

@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import ContentMenu from '../../components/ContentMenu';
 import Searchbar from '../../components/Searchbar';
-import { SearchError, PropertyColumn, StyledImage } from './styles';
-import PropertyCard from '../../components/PropertyCard';
+import { SearchError } from './styles';
 import ContentNav from '../../components/ContentNav';
 import BasicDetails from './BasicDetails';
 import Pictures from './Images';

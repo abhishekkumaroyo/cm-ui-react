@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropertyCard from '../../components/PropertyCard';
-import { ContentBodyWrapper, PropertyCardWrapper } from './stylesContact';
-import { TableDataName, TableDataContent } from './styles';
-import { BasicDetailsColumn } from './stylesBasicDetails';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+
 import PolicyDisplay from '../../components/PolicyDisplay';
+import { PropertyColumn } from './styles';
 
 export default function Policies(props) {
     const [policies, setPolicies] = useState([]);
@@ -20,8 +18,8 @@ export default function Policies(props) {
     }
 
     return (
-        <ContentBodyWrapper>
-            <BasicDetailsColumn>
+        <div>
+            <PropertyColumn>
                 <PropertyCard title="Cancellation Policy">
                     {policies.cancellationPolicy ? <PolicyDisplay policy={policies.cancellationPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
@@ -34,8 +32,9 @@ export default function Policies(props) {
                 <PropertyCard title="General Policies">
                     {policies.generalPolicies ? <PolicyDisplay policy={policies.generalPolicies} type="generalPolicies" /> : <div> no policy </div>}
                 </PropertyCard>
-            </BasicDetailsColumn>
-            <BasicDetailsColumn>
+            </PropertyColumn>
+
+            <PropertyColumn>
                 <PropertyCard title="Internet Policy">
                     {policies.internetPolicy ? <PolicyDisplay policy={policies.internetPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
@@ -45,7 +44,7 @@ export default function Policies(props) {
                 <PropertyCard title="Internet Policy">
                     {policies.internetPolicy ? <PolicyDisplay policy={policies.internetPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
-            </BasicDetailsColumn>
-        </ContentBodyWrapper>
+            </PropertyColumn>
+        </div>
     );
 }

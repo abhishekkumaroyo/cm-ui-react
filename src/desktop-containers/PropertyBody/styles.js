@@ -10,6 +10,17 @@ export const StyledImage = styled.img`
     height: 100px;
 `;
 
+export const PropertyColumn = styled.div`
+    padding: 0px 7.5px;
+    position: relative;
+    min-height: 1px;
+
+    @media (min-width: 992px) {
+        width: 50%;
+        float: left;
+    }
+`;
+
 export const TableDataName = styled.td`
     width: 25%;
     border: 0;

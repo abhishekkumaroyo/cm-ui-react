@@ -9,10 +9,14 @@ export default function PolicyDisplay(props) {
             <table>
                 {props.policy.map((pol, index) => (
                     <tbody key={index}>
-                        <div>
-                            <b>{pol.code}</b>
-                            <br />
-                        </div>
+                        <tr>
+                            <td>
+                                <div>
+                                    <b>{pol.code}</b>
+                                    <br />
+                                </div>
+                            </td>
+                        </tr>
                         {Object.keys(pol).map((item, itemIndex) => (
                             <tr key={itemIndex}>
                                 <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>

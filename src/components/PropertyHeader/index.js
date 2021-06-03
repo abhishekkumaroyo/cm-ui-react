@@ -1,8 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { LanguageRow, Language, HeaderContainer } from './styles.js';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
 
-//import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { languages } from '../../constants/languages';
 import { changeLanguage } from '../../actions/propertyLanguageAction';

@@ -1,5 +1,5 @@
 import { NavContainer, NavItems } from './styles';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import React from 'react';
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropertyCard from '../../components/PropertyCard';
 import { ContentBodyWrapper, PropertyCardWrapper } from './stylesContact';
 import { TableDataName, TableDataContent } from './styles';
+import { displayObjectValue } from '../../utils/helper';
 
 export default function Contact(props) {
     const [contactInfos, setContactInfos] = useState([]);
@@ -50,13 +51,7 @@ export default function Contact(props) {
                                     </tr>
                                     <tr>
                                         <TableDataName>Emails</TableDataName>
-                                        <TableDataContent>
-                                            {cont.emails.map((email, emailIndex) => (
-                                                <span key={emailIndex}>
-                                                    {email} <br />
-                                                </span>
-                                            ))}
-                                        </TableDataContent>
+                                        <TableDataContent>{displayObjectValue(cont.emails)}</TableDataContent>
                                     </tr>
                                 </tbody>
                             ))}
