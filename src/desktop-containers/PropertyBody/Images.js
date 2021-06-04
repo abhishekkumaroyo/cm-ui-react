@@ -6,6 +6,7 @@ import { ImagesContainer, ImageTile, ImageSliderContainer, Left, ImageSide, Righ
 
 import { TableDataName, TableDataContent, PropertyColumn } from './styles';
 import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+import PropertyHeader from '../../components/PropertyHeader';
 
 export default function Images(props) {
     const [pictures, setPictures] = useState([]);
@@ -42,6 +43,12 @@ export default function Images(props) {
 
     return (
         <div>
+            <PropertyHeader
+                title="Images"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}></PropertyHeader>
+
             <PropertyColumn>
                 {pictures[picIndex] ? (
                     <PropertyCard title="Image Details">

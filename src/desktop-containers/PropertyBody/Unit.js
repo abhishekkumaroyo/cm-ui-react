@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
 import PropertyCard from '../../components/PropertyCard';
 import PropertyDetailsCard from '../../components/PropertyDetailsCard';
+import PropertyHeader from '../../components/PropertyHeader';
 import PropertyImagesCard from '../../components/PropertyImagesCard';
 import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
@@ -124,30 +125,36 @@ export default function Unit(props) {
 
     return (
         <div>
-            <PropertyCard title="Units available (select any unit and any sub-unit)">
-                <div>
-                    <b>Level 1: </b>
-                    <br />
-                    {props.propertySearch.property.units.map((unit, ind) => (
-                        <UnitName key={ind} onClick={() => selectUnitOne(ind)} selected={ind == unitNumberOne}>
-                            {unit.type}
-                        </UnitName>
-                    ))}
-                    <br />
-                    <br />
-                </div>
-                <div>
-                    <b>Level 2: </b>
-                    <br />
-                    {props.propertySearch.property.units[unitNumberOne].units
-                        ? props.propertySearch.property.units[unitNumberOne].units.map((unit, ind) => (
-                              <UnitName key={ind} onClick={() => selectUnitTwo(ind)} selected={ind == unitNumberTwo}>
-                                  {unit.type}
-                              </UnitName>
-                          ))
-                        : null}
-                </div>
-            </PropertyCard>
+            <PropertyHeader
+                title="Unit Details"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}>
+                <PropertyCard title="Units available (select any unit and any sub-unit)">
+                    <div>
+                        <b>Level 1: </b>
+                        <br />
+                        {props.propertySearch.property.units.map((unit, ind) => (
+                            <UnitName key={ind} onClick={() => selectUnitOne(ind)} selected={ind == unitNumberOne}>
+                                {unit.type}
+                            </UnitName>
+                        ))}
+                        <br />
+                        <br />
+                    </div>
+                    <div>
+                        <b>Level 2: </b>
+                        <br />
+                        {props.propertySearch.property.units[unitNumberOne].units
+                            ? props.propertySearch.property.units[unitNumberOne].units.map((unit, ind) => (
+                                  <UnitName key={ind} onClick={() => selectUnitTwo(ind)} selected={ind == unitNumberTwo}>
+                                      {unit.type}
+                                  </UnitName>
+                              ))
+                            : null}
+                    </div>
+                </PropertyCard>
+            </PropertyHeader>
             <div>
                 <PropertyColumn>
                     <PropertyCard title="Unit Info">

@@ -39,7 +39,7 @@ class PropertyBody extends Component {
                     </Route>
 
                     <Route path="/property/images">
-                        <Pictures propertySearch={this.props.propertySearch} />
+                        <Pictures propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/room">
@@ -47,15 +47,15 @@ class PropertyBody extends Component {
                     </Route>
 
                     <Route path="/property/contact">
-                        <Contact propertySearch={this.props.propertySearch} />
+                        <Contact propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/policies">
-                        <Policies propertySearch={this.props.propertySearch} />
+                        <Policies propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/amenities">
-                        <Amenities propertySearch={this.props.propertySearch} />
+                        <Amenities propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/unit">

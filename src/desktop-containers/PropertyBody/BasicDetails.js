@@ -31,24 +31,24 @@ export default function BasicDetails(props) {
             name: {
                 texts: [
                     {
-                        value: 'dog',
+                        value: 'name',
                         languageCode: 'en'
                     },
                     {
-                        value: 'perro',
-                        languageCode: 'es'
+                        value: 'german name',
+                        languageCode: 'de'
                     }
                 ]
             },
             summary: {
                 texts: [
                     {
-                        value: 'name',
+                        value: 'summary',
                         languageCode: 'en'
                     },
                     {
-                        value: 'spanish name',
-                        languageCode: 'es'
+                        value: 'german summary',
+                        languageCode: 'de'
                     }
                 ]
             },
@@ -123,7 +123,11 @@ export default function BasicDetails(props) {
 
     return (
         <div>
-            <PropertyHeader language={props.language} />
+            <PropertyHeader
+                title="Basic Details"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}></PropertyHeader>
 
             <PropertyColumn>
                 <PropertyCard title="Property Info">

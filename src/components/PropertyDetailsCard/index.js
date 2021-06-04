@@ -5,8 +5,6 @@ import { DataContent, DataName } from './styles';
 export default function PropertyDetailsCard(props) {
     const [propertyDetails, setPropertyDetails] = useState({});
     const [propertyDescriptions, setPropertyDescriptions] = useState({});
-    // const [numberOfDesc, setNumberOfDesc] = useState([]);
-    // const [selectedDesc, setSelectedDesc] = useState(0);
 
     useEffect(() => {
         let infoObject = {};

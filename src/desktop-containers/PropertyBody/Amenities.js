@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
 import PropertyCard from '../../components/PropertyCard';
+import PropertyHeader from '../../components/PropertyHeader';
 import { UnitName } from './stylesUnit';
 
 export default function Amenities(props) {
@@ -33,33 +34,37 @@ export default function Amenities(props) {
 
     return (
         <div>
-            <PropertyCard title="Amenities">
-                <div>Property Id = {props.propertySearch.property.externalPropertyId}</div>
-                <div>Select language: EN LA IT</div>
-                <div>View amenities of</div>
-                <div>
-                    <b>Level 1: </b>
-                    <br />
-                    {props.propertySearch.property.units.map((unit, ind) => (
-                        <UnitName key={ind} onClick={() => selectUnitOne(ind)} selected={ind == unitNumberOne}>
-                            {unit.type}
-                        </UnitName>
-                    ))}
-                    <br />
-                    <br />
-                </div>
-                <div>
-                    <b>Level 2: </b>
-                    <br />
-                    {props.propertySearch.property.units[unitNumberOne].units
-                        ? props.propertySearch.property.units[unitNumberOne].units.map((unit, ind) => (
-                              <UnitName key={ind} onClick={() => selectUnitTwo(ind)} selected={ind == unitNumberTwo}>
-                                  {unit.type}
-                              </UnitName>
-                          ))
-                        : null}
-                </div>
-            </PropertyCard>
+            <PropertyHeader
+                title="Amenities"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}>
+                <PropertyCard title="View Amenities of">
+                    <div>
+                        <b>Level 1: </b>
+                        <br />
+                        {props.propertySearch.property.units.map((unit, ind) => (
+                            <UnitName key={ind} onClick={() => selectUnitOne(ind)} selected={ind == unitNumberOne}>
+                                {unit.type}
+                            </UnitName>
+                        ))}
+                        <br />
+                        <br />
+                    </div>
+                    <div>
+                        <b>Level 2: </b>
+                        <br />
+                        {props.propertySearch.property.units[unitNumberOne].units
+                            ? props.propertySearch.property.units[unitNumberOne].units.map((unit, ind) => (
+                                  <UnitName key={ind} onClick={() => selectUnitTwo(ind)} selected={ind == unitNumberTwo}>
+                                      {unit.type}
+                                  </UnitName>
+                              ))
+                            : null}
+                    </div>
+                </PropertyCard>
+            </PropertyHeader>
+
             <PropertyCard title="Unit Amenities">
                 <PropertyAmenitiesCard property={unit} full={true} />
             </PropertyCard>

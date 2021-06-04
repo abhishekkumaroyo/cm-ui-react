@@ -3,6 +3,7 @@ import PropertyCard from '../../components/PropertyCard';
 
 import PolicyDisplay from '../../components/PolicyDisplay';
 import { PropertyColumn } from './styles';
+import PropertyHeader from '../../components/PropertyHeader';
 
 export default function Policies(props) {
     const [policies, setPolicies] = useState([]);
@@ -19,6 +20,12 @@ export default function Policies(props) {
 
     return (
         <div>
+            <PropertyHeader
+                title="Policies"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}></PropertyHeader>
+
             <PropertyColumn>
                 <PropertyCard title="Cancellation Policy">
                     {policies.cancellationPolicy ? <PolicyDisplay policy={policies.cancellationPolicy} /> : <div> no policy </div>}
