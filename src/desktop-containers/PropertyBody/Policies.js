@@ -37,7 +37,11 @@ export default function Policies(props) {
                     {policies.prePaymentPolicy ? <PolicyDisplay policy={policies.prePaymentPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="General Policies">
-                    {policies.generalPolicies ? <PolicyDisplay policy={policies.generalPolicies} type="generalPolicies" /> : <div> no policy </div>}
+                    {policies.generalPolicies ? (
+                        <PolicyDisplay policy={policies.generalPolicies} type="generalPolicies" language={props.language} />
+                    ) : (
+                        <div> no policy </div>
+                    )}
                 </PropertyCard>
             </PropertyColumn>
 

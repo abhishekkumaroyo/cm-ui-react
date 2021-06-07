@@ -17,89 +17,6 @@ export default function Unit(props) {
     const [unitNumberTwo, setUnitNumberTwo] = useState(-1);
     const [unit, setUnit] = useState({});
 
-    const temp = {
-        parentId: 'AT-4824-10',
-        unitExternalID: 'AT-4824-101',
-        type: 'BASEMENT',
-        subType: 'TWIN',
-        sellable: false,
-        commonSpace: false,
-        description: {
-            name: {
-                texts: [
-                    {
-                        value: 'dog',
-                        languageCode: 'en'
-                    },
-                    {
-                        value: 'perro',
-                        languageCode: 'es'
-                    }
-                ]
-            },
-            summary: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    },
-                    {
-                        value: 'spanish name',
-                        languageCode: 'es'
-                    }
-                ]
-            },
-            headline: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            directions: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            ownerInfo: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            guestAccess: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            guestBookMessage: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            additionalHouseRules: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            }
-        }
-    };
-
     const selectUnitOne = (unit) => {
         setUnitNumberOne(unit);
         setUnitNumberTwo(-1);
@@ -117,9 +34,9 @@ export default function Unit(props) {
                 setUnit(props.propertySearch.property.units[unitNumberOne].units[unitNumberTwo]);
             }
         }
-    }, [unitNumberOne, unitNumberTwo, props.language]);
+    }, [unitNumberOne, unitNumberTwo]);
 
-    if (!props.propertySearch.property) {
+    if (!props.propertySearch.property || !unit.parentId) {
         return <PropertyCard title="UNIT">Enter correct property id</PropertyCard>;
     }
 
@@ -158,7 +75,7 @@ export default function Unit(props) {
             <div>
                 <PropertyColumn>
                     <PropertyCard title="Unit Info">
-                        <PropertyDetailsCard property={temp} language={props.language}></PropertyDetailsCard>
+                        <PropertyDetailsCard property={unit} language={props.language}></PropertyDetailsCard>
                     </PropertyCard>
                 </PropertyColumn>
 
@@ -167,7 +84,7 @@ export default function Unit(props) {
                         <PropertyImagesCard property={unit} />
                     </PropertyCard>
                     <PropertyCard title="Amenities">
-                        <PropertyAmenitiesCard property={unit} />
+                        <PropertyAmenitiesCard property={unit} language={props.language} />
                     </PropertyCard>
                     <PropertyCard title="Policies (select a policy)">
                         <PropertyPoliciesCard property={unit} />

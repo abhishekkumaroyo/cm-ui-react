@@ -13,7 +13,7 @@ export function getcmName(cmId) {
 */
 export function displayObjectValue(val) {
     // add a try catch block to check for the undefined values
-
+    // console.log(val);
     if (typeof val === 'boolean') {
         return val.toString();
     } else if (Array.isArray(val)) {
@@ -46,15 +46,22 @@ export function camelCaseToSentenceCase(val) {
     Display the text according to the opted language
 */
 export function displayLanguageText(val, lang = 'en') {
+    if (!val) {
+        return 'NA-1';
+    }
+
     let valArray;
 
     if ('texts' in val) {
         valArray = val.texts;
+    } else {
+        return 'NA-2';
     }
+
     for (var i = 0; i < valArray.length; i++) {
         if (valArray[i].languageCode == lang) {
             return valArray[i].value;
         }
     }
-    return 'NA';
+    return 'NA-3';
 }

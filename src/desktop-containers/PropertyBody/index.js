@@ -9,7 +9,7 @@ import Searchbar from '../../components/Searchbar';
 import { SearchError } from './styles';
 import ContentNav from '../../components/ContentNav';
 import BasicDetails from './BasicDetails';
-import Pictures from './Images';
+import Images from './Images';
 import Contact from './Contact';
 import Policies from './Policies';
 import Amenities from './Amenities';
@@ -39,7 +39,7 @@ class PropertyBody extends Component {
                     </Route>
 
                     <Route path="/property/images">
-                        <Pictures propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+                        <Images propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
                     </Route>
 
                     <Route path="/property/room">

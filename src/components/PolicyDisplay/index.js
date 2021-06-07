@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TableDataContent, TableDataName } from '../../desktop-containers/PropertyBody/styles';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+import { camelCaseToSentenceCase, displayLanguageText, displayObjectValue } from '../../utils/helper';
 
 export default function PolicyDisplay(props) {
     if (props.type == 'generalPolicies') {
@@ -20,7 +20,11 @@ export default function PolicyDisplay(props) {
                         {Object.keys(pol).map((item, itemIndex) => (
                             <tr key={itemIndex}>
                                 <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                <TableDataContent>{displayObjectValue(pol[item])}</TableDataContent>
+                                {item == 'description' ? (
+                                    <TableDataContent>{displayLanguageText(pol[item], props.language)}</TableDataContent>
+                                ) : (
+                                    <TableDataContent>{displayObjectValue(pol[item])}</TableDataContent>
+                                )}
                             </tr>
                         ))}
                     </tbody>

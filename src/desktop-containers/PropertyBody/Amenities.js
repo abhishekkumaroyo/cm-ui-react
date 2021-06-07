@@ -29,7 +29,7 @@ export default function Amenities(props) {
     }, [unitNumberOne, unitNumberTwo]);
 
     if (!props.propertySearch.property) {
-        return <PropertyCard title="Basic Details">Enter correct property id</PropertyCard>;
+        return <PropertyCard title="Amenities">Enter correct property id</PropertyCard>;
     }
 
     return (
@@ -66,10 +66,10 @@ export default function Amenities(props) {
             </PropertyHeader>
 
             <PropertyCard title="Unit Amenities">
-                <PropertyAmenitiesCard property={unit} full={true} />
+                <PropertyAmenitiesCard property={unit} full={true} language={props.language} />
             </PropertyCard>
             <PropertyCard title="Property Amenities">
-                <PropertyAmenitiesCard property={props.propertySearch.property} full={true} />
+                <PropertyAmenitiesCard property={props.propertySearch.property} full={true} language={props.language} />
             </PropertyCard>
         </div>
     );

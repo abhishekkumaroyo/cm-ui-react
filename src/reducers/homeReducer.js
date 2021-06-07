@@ -12,7 +12,6 @@ export default function (state = initialState, action) {
                 sidebar: !state.sidebar
             };
         default:
-            console.log('default');
             return state;
     }
 }

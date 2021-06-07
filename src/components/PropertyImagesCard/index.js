@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ImagesModal from '../ImagesModal';
 
 import { StyledImage } from './styles';
 
@@ -20,6 +21,7 @@ export default function PropertyImagesCard(props) {
                     <StyledImage src={item.url} />
                 </span>
             ))}
+            <ImagesModal propertyImages={propertyImages} />
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { displayObjectValue } from '../../utils/helper';
+import { displayLanguageText, displayObjectValue } from '../../utils/helper';
 
 import { AmenityRow, AmenityRowItem } from './styles';
 
@@ -7,12 +7,14 @@ export default function PropertyAmenitiesCard(props) {
     const [propertyAmenities, setPropertyAmenities] = useState([]);
 
     useEffect(() => {
+        //console.log(props.language);
+
         if (props.property.amenities) {
             setPropertyAmenities(props.property.amenities);
         } else {
             setPropertyAmenities([]);
         }
-    }, [props.property]);
+    }, [props.property, props.language]);
 
     return (
         <div>
@@ -29,7 +31,7 @@ export default function PropertyAmenitiesCard(props) {
             {propertyAmenities.map((amenity, index) => (
                 <AmenityRow key={index}>
                     <AmenityRowItem>{amenity.category}</AmenityRowItem>
-                    {props.full ? <AmenityRowItem>{amenity.description}</AmenityRowItem> : null}
+                    {props.full ? <AmenityRowItem>{displayLanguageText(amenity.description, props.language.language)}</AmenityRowItem> : null}
                     <AmenityRowItem>{amenity.quantity}</AmenityRowItem>
                     <AmenityRowItem>{amenity.associatedWith}</AmenityRowItem>
                     {props.full ? <AmenityRowItem>{amenity.unitReferenceId}</AmenityRowItem> : null}

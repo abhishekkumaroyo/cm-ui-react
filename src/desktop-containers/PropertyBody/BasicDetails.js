@@ -17,98 +17,17 @@ import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
 import PropertyCard from '../../components/PropertyCard';
 import PropertyHeader from '../../components/PropertyHeader';
 import { PropertyColumn } from './styles';
+import ImagesModal from '../../components/ImagesModal';
 
 export default function BasicDetails(props) {
     const [contactInfos, setContactInfos] = useState([]);
-
-    const temp = {
-        externalPropertyId: 'AT-4824-10',
-        propertyType: 'BUNGALOW',
-        hasMultipleSellableUnitsOrNot: true,
-        currencyCode: 'EUR',
-        languageCodes: ['en', 'de'],
-        propertyDescriptions: {
-            name: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    },
-                    {
-                        value: 'german name',
-                        languageCode: 'de'
-                    }
-                ]
-            },
-            summary: {
-                texts: [
-                    {
-                        value: 'summary',
-                        languageCode: 'en'
-                    },
-                    {
-                        value: 'german summary',
-                        languageCode: 'de'
-                    }
-                ]
-            },
-            headline: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            directions: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            ownerInfo: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            guestAccess: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            guestBookMessage: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            },
-            additionalHouseRules: {
-                texts: [
-                    {
-                        value: 'name',
-                        languageCode: 'en'
-                    }
-                ]
-            }
-        }
-    };
+    // const [property, setProperty] = useState({});
+    // const [language, setLanguage] = useState(null);
 
     useEffect(() => {
         if (props.propertySearch.property) {
-            const property = props.propertySearch.property;
-
-            if (property.contactInfoList) {
-                setContactInfos(property.contactInfoList);
+            if (props.propertySearch.property.contactInfoList) {
+                setContactInfos(props.propertySearch.property.contactInfoList);
             }
         }
     }, [props.propertySearch, props.language]);
@@ -131,19 +50,11 @@ export default function BasicDetails(props) {
 
             <PropertyColumn>
                 <PropertyCard title="Property Info">
-                    <PropertyDetailsCard property={temp} language={props.language} />
+                    <PropertyDetailsCard property={props.propertySearch.property} language={props.language} />
                 </PropertyCard>
 
                 <PropertyCard title="Property Address">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <PropertyAddressCard property={props.propertySearch.property} />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <PropertyAddressCard property={props.propertySearch.property} />
                     <ShowMapButton>
                         <Button message={'Show / Hide Map'} type="white" />
                     </ShowMapButton>
@@ -177,13 +88,10 @@ export default function BasicDetails(props) {
                     ))}
                 </PropertyCard>
                 <PropertyCard title="Property images">
-                    <PropertyImagesCard property={props.propertySearch.property} />
-                    <Link to="/property/images">
-                        <div>view more</div>
-                    </Link>
+                    <PropertyImagesCard property={props.propertySearch.property}></PropertyImagesCard>
                 </PropertyCard>
                 <PropertyCard title="Amenities">
-                    <PropertyAmenitiesCard property={props.propertySearch.property} />
+                    <PropertyAmenitiesCard property={props.propertySearch.property} language={props.language} />
                 </PropertyCard>
                 <PropertyCard title="Instructions">
                     <PropertyInstructionsCard property={props.propertySearch.property} />

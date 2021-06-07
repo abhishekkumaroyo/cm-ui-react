@@ -5,58 +5,70 @@ import { DataContent, DataName } from './styles';
 export default function PropertyDetailsCard(props) {
     const [propertyDetails, setPropertyDetails] = useState({});
     const [propertyDescriptions, setPropertyDescriptions] = useState({});
+    const [language, setLanguage] = useState('en');
 
     useEffect(() => {
         let infoObject = {};
         let descriptions = {};
-        if (!props.property.parentId) {
-            // case of property
-            infoObject['externalPropertyId'] = props.property.externalPropertyId;
-            infoObject['propertyType'] = props.property.propertyType;
-            infoObject['hasMultipleSellableUnitsOrNot'] = props.property.hasMultipleSellableUnitsOrNot;
-            infoObject['currencyCode'] = props.property.currencyCode;
-            infoObject['languageCodes'] = props.property.languageCodes; // it is an array separate it
-            setPropertyDetails(infoObject);
 
-            descriptions = props.property.propertyDescriptions;
+        if (props.language) {
+            setLanguage(props.language.language);
+        }
+        if (props.property.parentId || props.property.externalPropertyId) {
+            if (!props.property.parentId) {
+                // case of property
+                infoObject['externalPropertyId'] = props.property.externalPropertyId;
+                infoObject['propertyType'] = props.property.propertyType;
+                infoObject['hasMultipleSellableUnitsOrNot'] = props.property.hasMultipleSellableUnitsOrNot;
+                infoObject['currencyCode'] = props.property.currencyCode;
+                infoObject['languageCodes'] = props.property.languageCodes;
+                setPropertyDetails(infoObject);
 
-            let tempObject = {};
-            tempObject['name'] = descriptions.name;
-            tempObject['summary'] = descriptions.summary;
-            tempObject['headline'] = descriptions.headline;
-            tempObject['directions'] = descriptions.directions;
-            tempObject['ownerInfo'] = descriptions.ownerInfo;
-            tempObject['guestAccess'] = descriptions.guestAccess;
-            tempObject['guestBookMessage'] = descriptions.guestBookMessage;
-            tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
+                descriptions = props.property.propertyDescriptions;
+                let tempObject = {};
 
-            setPropertyDescriptions(tempObject);
-        } else {
-            // case of unit
-            infoObject = {};
-            infoObject['unitExternalId'] = props.property.unitExternalId;
-            infoObject['parentId'] = props.property.parentId;
-            infoObject['type'] = props.property.type;
-            infoObject['subType'] = props.property.subType;
-            infoObject['sellable'] = props.property.sellable;
-            infoObject['commonSpace'] = props.property.commonSpace;
+                tempObject['name'] = descriptions.name;
+                tempObject['summary'] = descriptions.summary;
+                tempObject['headline'] = descriptions.headline;
+                tempObject['directions'] = descriptions.directions;
+                tempObject['ownerInfo'] = descriptions.ownerInfo;
+                tempObject['guestAccess'] = descriptions.guestAccess;
+                tempObject['guestBookMessage'] = descriptions.guestBookMessage;
+                tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
 
-            setPropertyDetails(infoObject);
+                setPropertyDescriptions(tempObject);
+            } else {
+                // case of unit
+                infoObject = {};
+                infoObject['unitExternalId'] = props.property.unitExternalId;
+                infoObject['parentId'] = props.property.parentId;
+                infoObject['type'] = props.property.type;
+                infoObject['subType'] = props.property.subType;
+                infoObject['sellable'] = props.property.sellable;
+                infoObject['commonSpace'] = props.property.commonSpace;
 
-            descriptions = {};
-            descriptions = props.property.description;
+                setPropertyDetails(infoObject);
 
-            let tempObject = {};
-            tempObject['name'] = descriptions.name;
-            tempObject['summary'] = descriptions.summary;
-            tempObject['headline'] = descriptions.headline;
-            tempObject['directions'] = descriptions.directions;
-            tempObject['ownerInfo'] = descriptions.ownerInfo;
-            tempObject['guestAccess'] = descriptions.guestAccess;
-            tempObject['guestBookMessage'] = descriptions.guestBookMessage;
-            tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
+                descriptions = {};
+                descriptions = props.property.description;
+                let tempObject = {};
 
-            setPropertyDescriptions(tempObject);
+                if (!descriptions) {
+                    setPropertyDescriptions(tempObject);
+                    return;
+                }
+
+                tempObject['name'] = descriptions.name;
+                tempObject['summary'] = descriptions.summary;
+                tempObject['headline'] = descriptions.headline;
+                tempObject['directions'] = descriptions.directions;
+                tempObject['ownerInfo'] = descriptions.ownerInfo;
+                tempObject['guestAccess'] = descriptions.guestAccess;
+                tempObject['guestBookMessage'] = descriptions.guestBookMessage;
+                tempObject['additionalHouseRules'] = descriptions.additionalHouseRules;
+
+                setPropertyDescriptions(tempObject);
+            }
         }
     }, [props.property, props.language]);
 
@@ -80,7 +92,7 @@ export default function PropertyDetailsCard(props) {
                 {Object.keys(propertyDescriptions).map((info, index) => (
                     <tr key={index}>
                         <DataName>{camelCaseToSentenceCase(info)}</DataName>
-                        <DataContent>{displayLanguageText(propertyDescriptions[info], props.language.language)}</DataContent>
+                        <DataContent>{displayLanguageText(propertyDescriptions[info], language)}</DataContent>
                     </tr>
                 ))}
             </tbody>
