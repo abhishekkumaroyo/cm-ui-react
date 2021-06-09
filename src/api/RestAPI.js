@@ -33,7 +33,6 @@ const GET = (url, params, successCB, errorCb, headers) => {
 };
 
 const POST = (url, params, data, successCB, errorCb, headers) => {
-    // let state = store.getState();
     let config = {
         headers: {
             ...headers
@@ -41,10 +40,6 @@ const POST = (url, params, data, successCB, errorCb, headers) => {
     };
 
     if (params) config.params = params;
-
-    // console.log(baseURL + url);
-    // console.log(config);
-    // console.log(data);
 
     axios
         .post(baseURL + url, data, config)
