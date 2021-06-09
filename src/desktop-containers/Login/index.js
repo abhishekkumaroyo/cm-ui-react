@@ -1,22 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { PureComponent } from 'react';
-//import BodyContent from '../../components/BodyContent';
-//import Sidebar from '../../components/Sidebar';
-import {
-    LoginHeading,
-    LoginPageContainer,
-    LoginPageLeft,
-    LoginPageRight,
-    CompanyNameContainer,
-    CompanyNameInput,
-    FormContainer,
-    CheckBoxContainer,
-    ButtonContainer,
-    LoginButton,
-    CheckBox,
-    CheckBoxText,
-    LoginViaCredentials
-} from './styles.js';
+import Button, { LoaderButton } from '../../components/Button/index.js';
+
+import axios from 'axios';
+import { LoginPageContainer, LoginBox, InputBox, LoginBoxHeader, LoginBoxItem, ItemName } from './styles.js';
+
+import { connect } from 'react-redux';
+import { loginAction } from '../../actions/authActions';
+
+import * as apiConstants from '../../constants/apiConstants';
+const baseURL = apiConstants.API_HOST + '/';
 
 class Login extends PureComponent {
     constructor(props) {
@@ -25,58 +18,73 @@ class Login extends PureComponent {
             checked: false,
             credentials: false,
             companyName: '',
-            email: '',
-            password: ''
+            username: '',
+            password: '',
+            clientId: ''
         };
     }
 
-    viaCompany = (e) => {
+    onClientIdChange = (e) => {
         this.setState({
-            credentials: false
+            clientId: e.target.value.toUpperCase()
         });
     };
 
-    viaCredintials = () => {
+    onUsernameChange = (e) => {
         this.setState({
-            credentials: true
+            username: e.target.value
         });
     };
 
-    toggleCheckbox = () => {
+    onPasswordChange = (e) => {
         this.setState({
-            checked: !this.state.checked
+            password: e.target.value
         });
+    };
+
+    onLoginClick = (e) => {
+        e.preventDefault();
+        var data = { clientId: this.state.clientId, username: this.state.username, password: this.state.password };
+
+        this.props.loginAction(data);
     };
 
     render() {
         return (
             <LoginPageContainer>
-                <LoginPageLeft>left</LoginPageLeft>
-                <LoginPageRight>
-                    <LoginHeading>Login to Bolt</LoginHeading>
+                <LoginBox>
+                    <LoginBoxHeader> Enter Your Credentials </LoginBoxHeader>
+                    <LoginBoxItem>
+                        <ItemName>Client Id</ItemName>
+                        <InputBox onChange={this.onClientIdChange} placeholder="Client Id" />
+                    </LoginBoxItem>
+                    <LoginBoxItem>
+                        <ItemName>Username</ItemName>
+                        <InputBox onChange={this.onUsernameChange} placeholder="Username" />
+                    </LoginBoxItem>
+                    <LoginBoxItem>
+                        <ItemName>Password</ItemName>
+                        <InputBox onChange={this.onPasswordChange} placeholder="Password" type="password" />
+                    </LoginBoxItem>
 
-                    <FormContainer>
-                        <CompanyNameContainer>
-                            <CompanyNameInput />
-                        </CompanyNameContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type="checkbox" onClick={this.toggleCheckbox} />
-                            <CheckBoxText>Keep me logged in</CheckBoxText>
-                        </CheckBoxContainer>
-                        {/* <ButtonContainer> */}
-                        <LoginButton> Login </LoginButton>
-                        {this.state.credentials ? (
-                            <LoginViaCredentials onClick={this.viaCompany}>Login via company</LoginViaCredentials>
-                        ) : (
-                            <LoginViaCredentials onClick={this.viaCredintials}>Login via credentials</LoginViaCredentials>
-                        )}
-
-                        {/* </ButtonContainer> */}
-                    </FormContainer>
-                </LoginPageRight>
+                    {this.props.login.verifying ? <LoaderButton /> : <Button message="Login" onButtonClick={this.onLoginClick} />}
+                    {this.props.login.loginError ? (
+                        <div>{this.props.login.loginErrorMessage}</div>
+                    ) : this.props.login.loggedIn ? (
+                        <div>welcome {this.props.login.userData.username}</div>
+                    ) : (
+                        <div>enter details</div>
+                    )}
+                </LoginBox>
             </LoginPageContainer>
         );
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    login: state.login
+});
+
+export default connect(mapStateToProps, {
+    loginAction
+})(Login);

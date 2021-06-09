@@ -1,21 +1,5 @@
 const otaMappings = require('../constants/cm');
 
-export function getValue(object, value, defaultValue) {
-    // usage : getValue(userAuthenticationDetails, "data.wallet.money.currency")
-    if (!object || !value) {
-        return defaultValue;
-    }
-    const valueArr = value.split('.');
-    for (let i = 0; i < valueArr.length; i++) {
-        if (object[valueArr[i]] != undefined) {
-            object = object[valueArr[i]];
-        } else {
-            return defaultValue;
-        }
-    }
-    return object;
-}
-
 /*
     function to return the name of OTA given the cmId
 */
@@ -24,21 +8,13 @@ export function getcmName(cmId) {
     return cmData;
 }
 
-export function getKeyValueFromObject(obj) {
-    if (obj) {
-        return [Object.keys(obj)[0], Object.values(obj)[0]];
-    }
-    return null;
-}
-
 /*
     used to display the values (for bool, array) on the UI
 */
 export function displayObjectValue(val) {
     // add a try catch block to check for the undefined values
-
+    // console.log(val);
     if (typeof val === 'boolean') {
-        console.log(val.toString());
         return val.toString();
     } else if (Array.isArray(val)) {
         var temp = '';
@@ -50,15 +26,42 @@ export function displayObjectValue(val) {
                 temp = temp + ', ';
             }
         }
-        console.log(temp);
         return temp;
     } else {
         return val;
     }
 }
 
+/*
+    Use this function to display strings in sentence case which were originally in camel case
+    This is used to displyaing keys like ownerInfo
+*/
 export function camelCaseToSentenceCase(val) {
     var result = val.replace(/([A-Z])/g, ' $1');
     var finalResult = result.charAt(0).toUpperCase() + result.slice(1);
     return finalResult;
+}
+
+/*
+    Display the text according to the opted language
+*/
+export function displayLanguageText(val, lang = 'en') {
+    if (!val) {
+        return 'NA-1';
+    }
+
+    let valArray;
+
+    if ('texts' in val) {
+        valArray = val.texts;
+    } else {
+        return 'NA-2';
+    }
+
+    for (var i = 0; i < valArray.length; i++) {
+        if (valArray[i].languageCode == lang) {
+            return valArray[i].value;
+        }
+    }
+    return 'NA-3';
 }

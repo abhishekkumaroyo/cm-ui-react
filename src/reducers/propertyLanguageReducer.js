@@ -1,15 +1,15 @@
-import { TOGGLE_SIDEBAR } from '../actions/actionTypes';
+import { PROPERTY_DETAILS_LANGUAGE } from '../actions/actionTypes';
 
 const initialState = {
-    sidebar: false
+    language: 'en'
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case TOGGLE_SIDEBAR:
+        case PROPERTY_DETAILS_LANGUAGE:
             return {
                 ...state,
-                sidebar: !state.sidebar
+                language: action.payload
             };
         default:
             return state;

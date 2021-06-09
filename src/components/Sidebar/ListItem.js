@@ -1,9 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconContainer, SidebarContent, TextContainer } from './styles.js';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import './style.scss';
 
-//import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { toggleSidebar } from '../../actions/homeActions';

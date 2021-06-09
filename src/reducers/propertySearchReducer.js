@@ -13,8 +13,8 @@ export default function (state = initialState, action) {
         case SAVE_PROPERTY_SEARCH:
             return {
                 ...state,
-                property: action.payload.data.OHM,
-                mapping: action.payload.data.hotelData,
+                property: action.payload.data.hotelData,
+                mapping: action.payload.data.OHM,
                 searchError: false,
                 searchFetching: false
             };
@@ -23,6 +23,7 @@ export default function (state = initialState, action) {
                 ...state,
                 searchError: true,
                 property: null,
+                mapping: null,
                 searchErrorMessage: action.payload,
                 searchFetching: false
             };
@@ -32,7 +33,6 @@ export default function (state = initialState, action) {
                 searchFetching: true
             };
         default:
-            console.log('default');
             return state;
     }
 }

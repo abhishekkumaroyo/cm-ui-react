@@ -1,135 +1,112 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { ShowMapButton } from './stylesBasicDetails';
+
+import { getcmName } from '../../utils/helper';
+
 import Button from '../../components/Button';
-
-import PropertyCard from '../../components/PropertyCard';
-
-import { PropertyColumn, StyledImage } from './styles';
-import { DataContent, DataName, BasicDetailsColumn, ShowMapButton } from './stylesBasicDetails';
-
-import { camelCaseToSentenceCase, getcmName } from '../../utils/helper';
-import PropertyDetails from '../../components/PropertyDetailsCard';
+import PropertyDetailsCard from '../../components/PropertyDetailsCard';
 import PropertyAddressCard from '../../components/PropertyAddressCard';
 import PropertyPoliciesCard from '../../components/PropertyPoliciesCard';
+import PropertyInstructionsCard from '../../components/PropertyInstructionsCard';
+import PropertyRulesCard from '../../components/PropertyRulesCard';
+import PropertyImagesCard from '../../components/PropertyImagesCard';
+import PropertyAmenitiesCard from '../../components/PropertyAmenitiesCard';
+import PropertyCard from '../../components/PropertyCard';
+import PropertyHeader from '../../components/PropertyHeader';
+import { PropertyColumn } from './styles';
+import ImagesModal from '../../components/ImagesModal';
 
 export default function BasicDetails(props) {
     const [contactInfos, setContactInfos] = useState([]);
-    const [propertyInstructions, setPropertyInstructions] = useState([]);
-    const [propertyAddress, setPropertyAddress] = useState({});
+    // const [property, setProperty] = useState({});
+    // const [language, setLanguage] = useState(null);
 
     useEffect(() => {
         if (props.propertySearch.property) {
-            const property = props.propertySearch.property;
-
-            //console.log(getcmName(5));
-            if (property.contactInfoList) {
-                setContactInfos(property.contactInfoList);
-            }
-            if (property.rules && property.rules.propertyInstructions) {
-                setPropertyInstructions(property.rules.propertyInstructions);
+            if (props.propertySearch.property.contactInfoList) {
+                setContactInfos(props.propertySearch.property.contactInfoList);
             }
         }
-    }, [props.propertySearch]);
+    }, [props.propertySearch, props.language]);
 
     const getChannelName = (id) => {
-        console.log(getcmName(id));
         return getcmName(id);
     };
 
+    if (!props.propertySearch.property) {
+        return <PropertyCard title="Basic Details">Enter correct property id</PropertyCard>;
+    }
+
     return (
         <div>
-            <BasicDetailsColumn>
-                {props.propertySearch.property ? (
-                    <div>
-                        <PropertyCard title="Property Info">
-                            <PropertyDetails property={props.propertySearch.property} />
-                        </PropertyCard>
+            <PropertyHeader
+                title="Basic Details"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}></PropertyHeader>
 
-                        <PropertyCard title="Property Address">
-                            <table>
-                                <tbody>
-                                    <PropertyAddressCard property={props.propertySearch.property} />
-                                </tbody>
-                            </table>
-                            <ShowMapButton>
-                                <Button message={'Show / Hide Map'} type="white" />
-                            </ShowMapButton>
-                        </PropertyCard>
-                        <PropertyCard title="Contact">
-                            <div>Types of Contact Details:</div>
-                            <br />
-                            {contactInfos.length > 0 ? (
-                                contactInfos.map((info, infoIndex) => (
-                                    <div key={infoIndex}>
-                                        {infoIndex + 1}.) {info.type}
-                                    </div>
-                                ))
-                            ) : (
-                                <div>No Contact Info found</div>
-                            )}
-                            <Link to="/property/contact">
-                                <br />
-                                <div>View Full Contact Details</div>
-                            </Link>
-                        </PropertyCard>
-                    </div>
-                ) : (
-                    <PropertyCard title="Property Info">Enter correct property id</PropertyCard>
-                )}
-            </BasicDetailsColumn>
-            <BasicDetailsColumn>
-                {props.propertySearch.property ? (
-                    <div>
-                        <PropertyCard title="Property mappings">
-                            {props.propertySearch.mapping.map((item, index) => (
-                                <div key={index}>
-                                    <span>cmId: {item.cmId} | </span> <span>cmHotelId: {item.cmHotelId} | </span>
-                                    <div>{getChannelName(item.cmId).name}</div>
-                                </div>
-                            ))}
-                            <Link to="/property/mapping">
-                                <br />
-                                <div>Click to know More</div>
-                            </Link>
-                        </PropertyCard>
-                        <PropertyCard title="Property images">
-                            {props.propertySearch.property.images.map((item, index) => (
-                                <span key={index}>
-                                    <StyledImage src={item.url} />
-                                </span>
-                            ))}
-                            <Link to="/property/images">
-                                <div>view more</div>
-                            </Link>
-                        </PropertyCard>
+            <PropertyColumn>
+                <PropertyCard title="Property Info">
+                    <PropertyDetailsCard property={props.propertySearch.property} language={props.language} />
+                </PropertyCard>
 
-                        <PropertyCard title="Instructions">
-                            {propertyInstructions.map((instr, index) => (
-                                <div key={index} style={{ marginBottom: '10px' }}>
-                                    <h5 style={{ display: 'inline' }}>{index + 1}.) &emsp; </h5>
-                                    <div style={{ display: 'inline-grid' }}>
-                                        {Object.keys(instr).map((instructionKey, instructionIndex) => (
-                                            <div key={instructionIndex}>
-                                                <span>{camelCaseToSentenceCase(instructionKey)} : </span>
-                                                <span>{instr[instructionKey]}</span>
-                                                <br />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </PropertyCard>
-                        <PropertyCard title="Policies">
-                            <PropertyPoliciesCard property={props.propertySearch.property} />
-                            <Link to="/property/policies">
-                                <br />
-                                <div>View Policy details</div>
-                            </Link>
-                        </PropertyCard>
-                    </div>
-                ) : null}
-            </BasicDetailsColumn>
+                <PropertyCard title="Property Address">
+                    <PropertyAddressCard property={props.propertySearch.property} />
+                    <ShowMapButton>
+                        <Button message={'Show / Hide Map'} type="white" />
+                    </ShowMapButton>
+                </PropertyCard>
+                <PropertyCard title="Contact">
+                    <div>Types of Contact Details:</div>
+                    <br />
+                    {contactInfos.length > 0 ? (
+                        contactInfos.map((info, infoIndex) => (
+                            <div key={infoIndex}>
+                                {infoIndex + 1}.) {info.type}
+                            </div>
+                        ))
+                    ) : (
+                        <div>No Contact Info found</div>
+                    )}
+                    <Link to="/property/contact">
+                        <br />
+                        <div>View Full Contact Details</div>
+                    </Link>
+                </PropertyCard>
+            </PropertyColumn>
+
+            <PropertyColumn>
+                <PropertyCard title="Property mappings">
+                    {props.propertySearch.mapping.map((item, index) => (
+                        <div key={index}>
+                            <span>cmId: {item.cmId} | </span> <span>cmHotelId: {item.cmHotelId} | </span>
+                            <div>{getChannelName(item.cmId).name}</div>
+                        </div>
+                    ))}
+                </PropertyCard>
+                <PropertyCard title="Property images">
+                    <PropertyImagesCard property={props.propertySearch.property}></PropertyImagesCard>
+                </PropertyCard>
+                <PropertyCard title="Amenities">
+                    <PropertyAmenitiesCard property={props.propertySearch.property} language={props.language} />
+                </PropertyCard>
+                <PropertyCard title="Instructions">
+                    <PropertyInstructionsCard property={props.propertySearch.property} />
+                </PropertyCard>
+                <PropertyCard title="Rules">
+                    <PropertyRulesCard property={props.propertySearch.property} />
+                </PropertyCard>
+                <PropertyCard title="Policies (select a policy)">
+                    <PropertyPoliciesCard property={props.propertySearch.property} />
+                    <Link to="/property/policies">
+                        <br />
+                        <div>View Policy details</div>
+                    </Link>
+                </PropertyCard>
+            </PropertyColumn>
         </div>
     );
 }

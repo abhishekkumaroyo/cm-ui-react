@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, useParams } from 'react-router-dom';
-import Button, { LoaderButton } from '../Button/index.js';
 
-import {} from '../Icons/icons.js';
+import Button, { LoaderButton } from '../Button/index.js';
 
 import { Inputbox, SearchbarContainer } from './styles.js';
 
@@ -21,7 +18,7 @@ class Searchbar extends Component {
 
     onInputChange = (e) => {
         this.setState({
-            searchInput: e.target.value
+            searchInput: e.target.value.toUpperCase()
         });
     };
 

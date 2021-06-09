@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropertyCard from '../../components/PropertyCard';
-import { ContentBodyWrapper, PropertyCardWrapper } from './stylesContact';
-import { TableDataName, TableDataContent } from './styles';
-import { BasicDetailsColumn } from './stylesBasicDetails';
-import { camelCaseToSentenceCase, displayObjectValue } from '../../utils/helper';
+
+import PolicyDisplay from '../../components/PolicyDisplay';
+import { PropertyColumn } from './styles';
+import PropertyHeader from '../../components/PropertyHeader';
 
 export default function Policies(props) {
     const [policies, setPolicies] = useState([]);
@@ -19,129 +19,43 @@ export default function Policies(props) {
     }
 
     return (
-        <ContentBodyWrapper>
-            <BasicDetailsColumn>
+        <div>
+            <PropertyHeader
+                title="Policies"
+                language={props.language}
+                id={props.propertySearch.property.externalPropertyId}
+                propertyLanguages={props.propertySearch.property.languageCodes}></PropertyHeader>
+
+            <PropertyColumn>
                 <PropertyCard title="Cancellation Policy">
-                    {policies.cancellationPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.cancellationPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.cancellationPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.cancellationPolicy ? <PolicyDisplay policy={policies.cancellationPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="Instant Booking Policy">
-                    {policies.instantBookingPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.instantBookingPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.instantBookingPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.instantBookingPolicy ? <PolicyDisplay policy={policies.instantBookingPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="Pre-Payment Policy">
-                    {policies.cancellationPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.prePaymentPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.prePaymentPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.prePaymentPolicy ? <PolicyDisplay policy={policies.prePaymentPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="General Policies">
                     {policies.generalPolicies ? (
-                        <table>
-                            {policies.generalPolicies.map((policy, index) => (
-                                <tbody key={index}>
-                                    <div>
-                                        <b>{policy.code}</b>
-                                        <br />
-                                    </div>
-                                    {Object.keys(policy).map((item, itemIndex) => (
-                                        <tr key={itemIndex}>
-                                            <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                            <TableDataContent>{displayObjectValue(policy[item])}</TableDataContent>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            ))}
-                        </table>
+                        <PolicyDisplay policy={policies.generalPolicies} type="generalPolicies" language={props.language} />
                     ) : (
                         <div> no policy </div>
                     )}
                 </PropertyCard>
-            </BasicDetailsColumn>
-            <BasicDetailsColumn>
+            </PropertyColumn>
+
+            <PropertyColumn>
                 <PropertyCard title="Internet Policy">
-                    {policies.internetPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.internetPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.internetPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.internetPolicy ? <PolicyDisplay policy={policies.internetPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="Parking Policy">
-                    {policies.parkingPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.parkingPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.parkingPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.parkingPolicy ? <PolicyDisplay policy={policies.parkingPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
                 <PropertyCard title="Internet Policy">
-                    {policies.internetPolicy ? (
-                        <table>
-                            <tbody>
-                                {Object.keys(policies.internetPolicy).map((item, index) => (
-                                    <tr key={index}>
-                                        <TableDataName>{camelCaseToSentenceCase(item)}</TableDataName>
-                                        <TableDataContent>{displayObjectValue(policies.internetPolicy[item])}</TableDataContent>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <div> no policy </div>
-                    )}
+                    {policies.internetPolicy ? <PolicyDisplay policy={policies.internetPolicy} /> : <div> no policy </div>}
                 </PropertyCard>
-            </BasicDetailsColumn>
-        </ContentBodyWrapper>
+            </PropertyColumn>
+        </div>
     );
 }

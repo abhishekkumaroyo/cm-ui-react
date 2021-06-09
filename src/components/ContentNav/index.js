@@ -1,5 +1,5 @@
 import { NavContainer, NavItems } from './styles';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import React from 'react';
 
@@ -11,16 +11,6 @@ export default function ContentNav() {
                 <NavItems>
                     <Link to={`${match.url}/basic`} style={{ textDecoration: 'none' }}>
                         Basic Details
-                    </Link>
-                </NavItems>
-                <NavItems>
-                    <Link to={`${match.url}/images`} style={{ textDecoration: 'none' }}>
-                        Images
-                    </Link>
-                </NavItems>
-                <NavItems>
-                    <Link to={`${match.url}/mapping`} style={{ textDecoration: 'none' }}>
-                        Property Mappings
                     </Link>
                 </NavItems>
                 <NavItems>

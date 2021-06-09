@@ -32,7 +32,6 @@ export const startFetchingSearchData = () => {
 };
 
 export const saveSearchResult = (data) => {
-    console.log(data);
     return {
         type: SAVE_PROPERTY_SEARCH,
         payload: data

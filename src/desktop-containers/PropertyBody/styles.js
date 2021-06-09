@@ -10,6 +10,17 @@ export const StyledImage = styled.img`
     height: 100px;
 `;
 
+export const PropertyColumn = styled.div`
+    padding: 0px 7.5px;
+    position: relative;
+    min-height: 1px;
+
+    @media (min-width: 992px) {
+        width: 50%;
+        float: left;
+    }
+`;
+
 export const TableDataName = styled.td`
     width: 25%;
     border: 0;
@@ -29,4 +40,15 @@ export const TableDataContent = styled.td`
     vertical-align: middle;
     padding: 5px;
     line-height: 1.42857;
+`;
+
+export const LanguageRow = styled.div`
+    display: flex;
+`;
+
+export const Language = styled.div`
+    padding: 3px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
 `;
