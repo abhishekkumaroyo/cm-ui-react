@@ -4,7 +4,6 @@ const baseURL = apiConstants.API_HOST + '/';
 // import { store } from '../store';
 
 const GET = (url, params, successCB, errorCb, headers) => {
-    // let state = store.getState();
     let config = {
         headers: {
             //Can add mandatory headers here
@@ -13,8 +12,6 @@ const GET = (url, params, successCB, errorCb, headers) => {
     };
 
     if (params) config.params = params;
-    // console.log(baseURL + url);
-    // console.log(config);
     axios
         .get(baseURL + url, config)
         .then((response) => {
@@ -56,7 +53,31 @@ const POST = (url, params, data, successCB, errorCb, headers) => {
         });
 };
 
+const DELETE = (url, params, successCB, errorCb, headers) => {
+    let config = {
+        headers: {
+            ...headers
+        }
+    };
+
+    if (params) config.params = params;
+
+    axios
+        .delete(baseURL + url, config)
+        .then((response) => {
+            console.log(response);
+            if (successCB) successCB(response.data);
+        })
+        .catch((error) => {
+            console.log(error.response);
+            if (errorCb) {
+                errorCb(error);
+            }
+        });
+};
+
 export default {
     GET,
-    POST
+    POST,
+    DELETE
 };

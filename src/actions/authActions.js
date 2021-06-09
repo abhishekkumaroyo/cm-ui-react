@@ -1,4 +1,4 @@
-import { START_VERIFICATION, SAVE_LOGIN_RESULT, LOGIN_ERROR } from './actionTypes';
+import { START_VERIFICATION, SAVE_LOGIN_RESULT, LOGIN_ERROR, LOGOUT_SUCCESS } from './actionTypes';
 
 import RESTApi from '../api/RestAPI';
 
@@ -50,4 +50,23 @@ export const errorLogin = (error) => {
             payload: 'server error'
         };
     }
+};
+
+export const logoutAction = () => {
+    RESTApi.DELETE(
+        'user/logout',
+        null,
+        (data) => {
+            console.log(data);
+        },
+        (error) => {
+            console.log(error);
+        },
+        {
+            'auth-token': localStorage.getItem('token')
+        }
+    );
+    return {
+        type: LOGOUT_SUCCESS
+    };
 };

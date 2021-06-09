@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import Button, { LoaderButton } from '../../components/Button/index.js';
 
 import axios from 'axios';
-import { LoginPageContainer, LoginBox, InputBox, LoginBoxHeader, LoginBoxItem, ItemName } from './styles.js';
+import { LoginPageContainer, LoginBox, InputBox, LoginBoxHeader, LoginBoxItem, ItemName, ButtonContainer } from './styles.js';
 
 import { connect } from 'react-redux';
 import { loginAction } from '../../actions/authActions';
@@ -66,15 +66,11 @@ class Login extends PureComponent {
                         <ItemName>Password</ItemName>
                         <InputBox onChange={this.onPasswordChange} placeholder="Password" type="password" />
                     </LoginBoxItem>
+                    <ButtonContainer>
+                        {this.props.login.verifying ? <LoaderButton /> : <Button message="Login" onButtonClick={this.onLoginClick} />}
+                    </ButtonContainer>
 
-                    {this.props.login.verifying ? <LoaderButton /> : <Button message="Login" onButtonClick={this.onLoginClick} />}
-                    {this.props.login.loginError ? (
-                        <div>{this.props.login.loginErrorMessage}</div>
-                    ) : this.props.login.loggedIn ? (
-                        <div>welcome {this.props.login.userData.username}</div>
-                    ) : (
-                        <div>enter details</div>
-                    )}
+                    {this.props.login.loginError ? <div>{this.props.login.loginErrorMessage}</div> : null}
                 </LoginBox>
             </LoginPageContainer>
         );

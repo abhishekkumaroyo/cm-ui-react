@@ -40,3 +40,8 @@ export const InputBox = styled.input`
     //width: 100%;
     width: 60%;
 `;
+
+export const ButtonContainer = styled.div`
+    width: 175px;
+    margin: auto;
+`;
