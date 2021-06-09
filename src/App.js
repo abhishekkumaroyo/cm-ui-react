@@ -1,11 +1,26 @@
-import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from './desktop-containers/Dashboard';
+import Login from './desktop-containers/Login';
+import HomePage from './desktop-containers/HomePage';
+import './App.scss';
 
-const App = () => (
-    <Switch>
-        <Route path="/" exact component={Dashboard} />;
-    </Switch>
-);
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default App;
+export class App extends Component {
+    render() {
+        if (!this.props.login.loggedIn) {
+            return <Login />;
+        }
+        return (
+            <Switch>
+                <Route path="/" component={HomePage} />;
+            </Switch>
+        );
+    }
+}
+
+const mapStateToProps = (state) => ({
+    login: state.login
+});
+
+export default connect(mapStateToProps, {})(App);

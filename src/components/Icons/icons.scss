@@ -97,3 +97,28 @@
     background-repeat: no-repeat;
     background-position: 0 0;
 }
+
+.leftArrowIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/arrowLeftBlack.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+.rightArrowIcon {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    background-image: url(./icons/arrowLeftBlack.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    transform: rotate(180deg);
+}
