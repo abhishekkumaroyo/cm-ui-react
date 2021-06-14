@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BookingsBody from '../../desktop-containers/BookingsBody/index.js';
-import { BookingsIcon } from '../Icons/icons.js';
 import {
     IconContainer,
     NavbarContainer,
@@ -33,9 +31,8 @@ class Navbar extends Component {
                     <TextContainer>Channel Manager</TextContainer>
                 </NavLeft>
 
-                {/* <div> welcome {this.props.login.userData.username}</div> */}
                 <NavRight>
-                    <WelcomeContainer>Welcome {this.props.login.userData.username}</WelcomeContainer>
+                    {/* <WelcomeContainer>Welcome {this.props.login.userData.username}</WelcomeContainer> */}
                     <Button message="Logout" onButtonClick={this.logoutClick} />
                 </NavRight>
             </NavbarContainer>

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect, useState, Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, useParams, useHistory } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import ContentMenu from '../../components/ContentMenu';
 import Searchbar from '../../components/Searchbar';
@@ -15,57 +15,139 @@ import Policies from './Policies';
 import Amenities from './Amenities';
 import Unit from './Unit';
 import MappingDetails from './MappingDetails';
-class PropertyBody extends Component {
-    componentDidMount() {}
 
-    render() {
-        const ErrorMessage = <SearchError>{this.props.propertySearch.searchErrorMessage}</SearchError>;
+import { searchAction } from '../../actions/propertySearchActions';
 
-        return (
-            <div>
-                <ContentMenu title="Property">
-                    <Searchbar>{this.props.propertySearch.searchError ? ErrorMessage : null}</Searchbar>
-                </ContentMenu>
+function PropertyBody(props) {
+    let { propertyId } = useParams();
 
-                <ContentNav />
+    const [property, setProperty] = useState();
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-                <Switch>
-                    <Route exact path="/property">
-                        <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+    useEffect(() => {
+        if (propertyId) {
+            dispatch(searchAction({ searchInput: propertyId }));
+        } else if (props.propertySearch.property && props.propertySearch.property.externalPropertyId) {
+            history.push(`property/${props.propertySearch.property.externalPropertyId}`);
+        }
+    }, [propertyId]);
 
-                    <Route path="/property/basic">
-                        <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+    const ErrorMessage = <SearchError>{props.propertySearch.searchErrorMessage}</SearchError>;
 
-                    <Route path="/property/images">
-                        <Images propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+    return (
+        <div>
+            <ContentMenu title="Property">
+                <Searchbar>{props.propertySearch.searchError ? ErrorMessage : null}</Searchbar>
+            </ContentMenu>
 
-                    <Route path="/property/mapping">
-                        <MappingDetails propertySearch={this.props.propertySearch} />
-                    </Route>
+            {propertyId ? <ContentNav propertyId={propertyId} /> : null}
 
-                    <Route path="/property/contact">
-                        <Contact propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+            <Switch>
+                <Route exact path={`/`}>
+                    <BasicDetails propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+                <Route exact path={`/property/:id/`}>
+                    <BasicDetails propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+                <Route exact path={`/property/:id/basic`}>
+                    <BasicDetails propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
 
-                    <Route path="/property/policies">
-                        <Policies propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+                <Route path={`/property/:id/images`}>
+                    <Images propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
 
-                    <Route path="/property/amenities">
-                        <Amenities propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
+                <Route path={`/property/:id/mapping`}>
+                    <MappingDetails propertySearch={props.propertySearch} />
+                </Route>
 
-                    <Route path="/property/unit">
-                        <Unit propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
-                    </Route>
-                </Switch>
-            </div>
-        );
-    }
+                <Route exact path={`/property/:id/contact`}>
+                    <Contact propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+
+                <Route path={`/property/:id/policies`}>
+                    <Policies propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+
+                <Route path={`/property/:id/amenities`}>
+                    <Amenities propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+
+                <Route path={`/property/:id/unit`}>
+                    <Unit propertySearch={props.propertySearch} language={props.propertyLanguage} />
+                </Route>
+            </Switch>
+        </div>
+    );
 }
+
+// class PropertyBody extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             propertyId: null
+//         };
+//     }
+
+//     componentDidMount() {
+//         if (this.props.propertySearch.property && this.props.propertySearch.property.externalPropertyId) {
+//             this.setState({
+//                 propertyId: this.props.propertySearch.property.externalPropertyId
+//             });
+//         }
+//     }
+
+//     render() {
+// const ErrorMessage = <SearchError>{this.props.propertySearch.searchErrorMessage}</SearchError>;
+
+// return (
+//     <div>
+//         <ContentMenu title="Property">
+//             <Searchbar>{this.props.propertySearch.searchError ? ErrorMessage : null}</Searchbar>
+//         </ContentMenu>
+
+//         {this.state.propertyId ? <ContentNav propertyId={this.props.propertySearch.property.externalPropertyId} /> : null}
+
+//         <Switch>
+//             <Route exact path={`/property/`}>
+//                 <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+
+//             {this.state.propertyId ? (
+//                 <Route path={`/property/${this.props.propertySearch.property.externalPropertyId}/basic`}>
+//                     <BasicDetails propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//                 </Route>
+//             ) : null}
+
+//             <Route path="/property/images">
+//                 <Images propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+
+//             <Route path="/property/mapping">
+//                 <MappingDetails propertySearch={this.props.propertySearch} />
+//             </Route>
+
+//             <Route path="/property/contact">
+//                 <Contact propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+
+//             <Route path="/property/policies">
+//                 <Policies propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+
+//             <Route path="/property/amenities">
+//                 <Amenities propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+
+//             <Route path="/property/unit">
+//                 <Unit propertySearch={this.props.propertySearch} language={this.props.propertyLanguage} />
+//             </Route>
+//         </Switch>
+//     </div>
+// );
+//     }
+// }
 
 const mapStateToProps = (state) => ({
     home: state.home,
@@ -73,4 +155,6 @@ const mapStateToProps = (state) => ({
     propertyLanguage: state.propertyLanguage
 });
 
-export default connect(mapStateToProps)(PropertyBody);
+export default connect(mapStateToProps, {
+    searchAction
+})(PropertyBody);

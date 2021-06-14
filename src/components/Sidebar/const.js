@@ -20,6 +20,12 @@ export const items = [
         icon: <PropertyIcon />
     },
     {
+        id: 8,
+        name: 'Promotions',
+        url: '/promotions',
+        icon: <ChannelsIcon />
+    },
+    {
         id: 4,
         name: 'Inventory',
         url: '/inventory',
