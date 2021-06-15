@@ -19,6 +19,11 @@ export default function ContentNav() {
                     </Link>
                 </NavItems>
                 <NavItems>
+                    <Link to={`${match.url}/mapping`} style={{ textDecoration: 'none' }}>
+                        Mappings Details
+                    </Link>
+                </NavItems>
+                <NavItems>
                     <Link to={`${match.url}/policies`} style={{ textDecoration: 'none' }}>
                         Policies
                     </Link>

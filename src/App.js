@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 
 export class App extends Component {
     render() {
-        if (!this.props.login.loggedIn) {
-            return <Login />;
-        }
+        // if (!this.props.login.loggedIn) {
+        //     return <Login />;
+        // }
         return (
             <Switch>
                 <Route path="/" component={HomePage} />;
