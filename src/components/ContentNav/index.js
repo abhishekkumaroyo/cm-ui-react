@@ -1,10 +1,25 @@
 import { NavContainer, NavItems } from './styles';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export default function ContentNav() {
+export default function ContentNav(props) {
     let match = useRouteMatch();
+
+    useEffect(() => {
+        console.log(props.propertyId);
+    });
+
+    // if (!props.propertyId) {
+    //     return (
+    //         <NavContainer>
+    //             <NavItems>
+    //                 <Link to="/">home</Link>
+    //             </NavItems>
+    //         </NavContainer>
+    //     );
+    // }
+
     return (
         <div>
             <NavContainer>

@@ -11,6 +11,7 @@ import RatePlansBody from '../RatePlansBody/index.js';
 import Sidebar from '../../components/Sidebar/index.js';
 import Navbar from '../../components/Navbar/index.js';
 import { BodyContainer, MainContainer } from './styles.js';
+import Promotions from '../Promotions/index.js';
 
 class HomePage extends Component {
     constructor(props) {
@@ -30,11 +31,13 @@ class HomePage extends Component {
                         <Route path="/" exact component={DashboardBody} />
                         <Route path="/dashboard" component={DashboardBody} />
                         <Route path="/bookings" component={BookingsBody} />
-                        <Route path="/property" component={PropertyBody} />
+                        <Route path={`/property/`} exact component={PropertyBody} />
+                        <Route path={`/property/:propertyId`} component={PropertyBody} />
                         <Route path="/inventory" component={InventoryBody} />
                         <Route path="/pricing" component={PricingBody} />
                         <Route path="/rateplans" component={RatePlansBody} />
                         <Route path="/channels" component={ChannelsBody} />
+                        <Route path="/promotions" component={Promotions} />
                     </Switch>
                 </MainContainer>
             </BodyContainer>

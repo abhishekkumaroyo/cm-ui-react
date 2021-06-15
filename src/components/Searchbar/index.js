@@ -1,45 +1,37 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 
 import Button, { LoaderButton } from '../Button/index.js';
-
 import { Inputbox, SearchbarContainer } from './styles.js';
-
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { searchAction } from '../../actions/propertySearchActions';
 
-class Searchbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchInput: '',
-            error: null
-        };
-    }
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
-    onInputChange = (e) => {
-        this.setState({
-            searchInput: e.target.value.toUpperCase()
-        });
+function Searchbar(props) {
+    const history = useHistory();
+    //const dispatch = useDispatch();
+
+    const [searchInput, setSearchInput] = useState('');
+
+    // let match = useRouteMatch(`/property/${searchInput}`);
+
+    const onInputChange = (e) => {
+        setSearchInput(e.target.value);
     };
 
-    onSeachClick = () => {
-        this.props.searchAction(this.state);
+    const onSeachClick = () => {
+        //dispatch(searchAction({ searchInput: searchInput }));
+        history.push(`/property/${searchInput}`);
     };
 
-    render() {
-        return (
-            <SearchbarContainer>
-                <Inputbox placeholder="Search Property" type="text" onChange={this.onInputChange} />
-                {this.props.propertySearch.searchFetching ? (
-                    <LoaderButton />
-                ) : (
-                    <Button message="Search" onButtonClick={this.onSeachClick} type="white" />
-                )}
+    return (
+        <SearchbarContainer>
+            <Inputbox placeholder="Search Property" type="text" onChange={onInputChange} />
+            {props.propertySearch.searchFetching ? <LoaderButton /> : <Button message="Search" onButtonClick={onSeachClick} type="white" />}
 
-                {this.props.children}
-            </SearchbarContainer>
-        );
-    }
+            {props.children}
+        </SearchbarContainer>
+    );
 }
 
 const mapStateToProps = (state) => ({

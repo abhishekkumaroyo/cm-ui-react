@@ -19,12 +19,21 @@ export const ListItem = (props) => {
         }
     });
 
-    const toggleSide = () => {
+    const toggleSide = (e) => {
+        if (match) {
+            e.preventDefault();
+        }
         props.toggleSidebar();
     };
 
+    const routeClick = (e) => {
+        if (match) {
+            e.preventDefault();
+        }
+    };
+
     return (
-        <Link to={props.url} style={{ textDecoration: 'none' }}>
+        <Link to={props.url} style={{ textDecoration: 'none' }} onClick={routeClick}>
             <SidebarContent styled={matched}>
                 <IconContainer onClick={toggleSide}>{props.icon}</IconContainer>
                 <TextContainer visible={props.home.sidebar}>{props.name}</TextContainer>

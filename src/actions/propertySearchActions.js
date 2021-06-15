@@ -5,6 +5,7 @@ import RESTApi from '../api/RestAPI';
 // export const getCitiesByChar = location => (dispatch, getState) => {
 export const searchAction = ({ searchInput }) => (dispatch) => {
     //Action to fetch location autocomplete data
+    console.log('data');
     const params = {
         hotelId: searchInput,
         clientId: 1
@@ -16,10 +17,11 @@ export const searchAction = ({ searchInput }) => (dispatch) => {
         'search',
         params,
         (data) => {
+            // console.log(data);
             if (data) dispatch(saveSearchResult(data));
         },
         (error) => {
-            console.log(error);
+            // console.log(error);
             dispatch(errorFetchingSearch(error));
         }
     );

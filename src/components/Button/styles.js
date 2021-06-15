@@ -30,5 +30,12 @@ export const ButtonContainer = styled.div`
             background: #ffffff;
             border: 1px solid rgba(34, 152, 218, 0.5);
             color: #2298da;
-        `}//position: fixed;
+        `}
+
+    ${(props) =>
+        props.type == 'blue' &&
+        css`
+            background-color: rgb(52, 95, 158);
+            color: whitesmoke;
+        `}
 `;

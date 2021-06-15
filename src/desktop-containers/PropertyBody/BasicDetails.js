@@ -25,6 +25,7 @@ export default function BasicDetails(props) {
     // const [language, setLanguage] = useState(null);
 
     useEffect(() => {
+        console.log(props.propertySearch);
         if (props.propertySearch.property) {
             if (props.propertySearch.property.contactInfoList) {
                 setContactInfos(props.propertySearch.property.contactInfoList);
