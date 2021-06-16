@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {
+    NavLeft,
+    NavRight,
     IconContainer,
     NavbarContainer,
     TextContainer,
@@ -10,16 +12,21 @@ import {
     DropDownMenu
 } from './styles.js';
 
+import Button from '../Button/index.js';
+//import { logoutAction } from '../../actions/authActions';
+
 class Navbar extends Component {
     render() {
         return (
             <NavbarContainer>
-                <MenuDisplay />
-                <TextContainer>Channel Manager</TextContainer>
-                <AlertIcon />
-                <NotificationIcon />
-                <PropertySearchBar />
-                <DropDownMenu />
+                <NavLeft>
+                    <MenuDisplay />
+                    <TextContainer>Channel Manager</TextContainer>
+                </NavLeft>
+
+                <NavRight>
+                    <Button message="Logout" onButtonClick={this.logoutClick} />
+                </NavRight>
             </NavbarContainer>
         );
     }
