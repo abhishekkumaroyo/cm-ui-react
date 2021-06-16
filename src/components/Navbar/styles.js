@@ -13,6 +13,24 @@ export const NavbarContainer = styled.div`
     z-index: 10;
 `;
 
+export const NavLeft = styled.div`
+    display: flex;
+    left: 0;
+`;
+
+export const NavRight = styled.div`
+    display: flex;
+    right: 0;
+    position: fixed;
+    margin: 2px;
+`;
+
+export const WelcomeContainer = styled.div`
+    margin: auto;
+    font-weight: 600;
+    font-size: 15px;
+`;
+
 export const MenuDisplay = styled.div`
     cursor: pointer;
     margin: 10px 15px;
@@ -36,7 +54,7 @@ export const TextContainer = styled.div`
 export const AlertIcon = styled.div`
     cursor: pointer;
     margin: 13px;
-    background-image: url(./icons/alertIcon.svg);
+    background-image: url(../Icons/icons/alertIcon.svg);
 `;
 
 export const NotificationIcon = styled.div`

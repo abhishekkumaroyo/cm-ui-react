@@ -5,6 +5,8 @@ import PropertyCard from '../../components/PropertyCard';
 export default function MappingDetails(props) {
     const [mappings, setMappings] = useState([]);
 
+    console.log(props);
+
     if (props.propertySearch.property && props.propertySearch.property.mappings) {
         setMappings(props.propertySearch.property.mappings);
     }

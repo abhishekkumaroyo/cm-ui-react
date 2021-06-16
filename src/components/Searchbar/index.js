@@ -30,7 +30,11 @@ class Searchbar extends Component {
         return (
             <SearchbarContainer>
                 <Inputbox placeholder="Search Property" type="text" onChange={this.onInputChange} />
-                {this.props.propertySearch.searchFetching ? <LoaderButton /> : <Button message="Search" onButtonClick={this.onSeachClick} />}
+                {this.props.propertySearch.searchFetching ? (
+                    <LoaderButton />
+                ) : (
+                    <Button message="Search" onButtonClick={this.onSeachClick} type="white" />
+                )}
 
                 {this.props.children}
             </SearchbarContainer>

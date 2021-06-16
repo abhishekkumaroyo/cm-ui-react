@@ -1,4 +1,4 @@
-import { START_VERIFICATION, SAVE_LOGIN_RESULT, LOGIN_ERROR } from '../actions/actionTypes';
+import { START_VERIFICATION, SAVE_LOGIN_RESULT, LOGIN_ERROR, LOGOUT_SUCCESS } from '../actions/actionTypes';
 
 const initialState = {
     verifying: false,
@@ -33,6 +33,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 verifying: true
+            };
+        case LOGOUT_SUCCESS:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                verifying: false,
+                loggedIn: false,
+                loginError: false,
+                loginErrorMessage: '',
+                userData: null
             };
         default:
             return state;

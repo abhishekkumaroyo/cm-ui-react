@@ -38,6 +38,12 @@ export default function ContentNav() {
                         Unit
                     </Link>
                 </NavItems>
+
+                <NavItems>
+                    <Link to={`${match.url}/setting`} style={{ textDecoration: 'none' }}>
+                        Settings
+                    </Link>
+                </NavItems>
             </NavContainer>
         </div>
     );
