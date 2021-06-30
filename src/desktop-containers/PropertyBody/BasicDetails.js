@@ -18,9 +18,13 @@ import PropertyCard from '../../components/PropertyCard';
 import PropertyHeader from '../../components/PropertyHeader';
 import { PropertyColumn } from './styles';
 import ImagesModal from '../../components/ImagesModal';
+import SettingsCard from '../../components/SettingsCard';
 
 export default function BasicDetails(props) {
-    const [contactInfos, setContactInfos] = useState([]);
+    const [contactInfos, setContactInfos] = useState({});
+    const [settings, setSettings] = useState({});
+    // console.log(props);
+
     // const [property, setProperty] = useState({});
     // const [language, setLanguage] = useState(null);
 
@@ -28,6 +32,9 @@ export default function BasicDetails(props) {
         if (props.propertySearch.property) {
             if (props.propertySearch.property.contactInfoList) {
                 setContactInfos(props.propertySearch.property.contactInfoList);
+            }
+            if (props.propertySearch.property.settingsList) {
+                setSettings(props.propertySearch.property.SettingsList);
             }
         }
     }, [props.propertySearch, props.language]);
@@ -74,6 +81,15 @@ export default function BasicDetails(props) {
                     <Link to="/property/contact">
                         <br />
                         <div>View Full Contact Details</div>
+                    </Link>
+                </PropertyCard>
+            </PropertyColumn>
+            <PropertyColumn>
+                <PropertyCard title="Settings">
+                    <SettingsCard property={props.propertySearch.property} />
+                    <br />
+                    <Link to="/property/setting">
+                        <div>view Settings details</div>
                     </Link>
                 </PropertyCard>
             </PropertyColumn>

@@ -7,15 +7,13 @@ import {
     NavRight,
     IconContainer,
     NavbarContainer,
-    NavLeft,
-    NavRight,
     TextContainer,
     MenuDisplay,
     AlertIcon,
     NotificationIcon,
     PropertySearchBar,
-    DropDownMenu,
-    WelcomeContainer
+    DropDownMenu
+    //  WelcomeContainer
 } from './styles.js';
 
 import { logoutAction } from '../../actions/authActions';
@@ -37,7 +35,7 @@ class Navbar extends Component {
 
                 {/* <div> welcome {this.props.login.userData.username}</div> */}
                 <NavRight>
-                    <WelcomeContainer>Welcome {this.props.login.userData.username}</WelcomeContainer>
+                    {/* <WelcomeContainer>Welcome {this.props.login.userData.username}</WelcomeContainer> */}
                     <Button message="Logout" onButtonClick={this.logoutClick} />
                 </NavRight>
             </NavbarContainer>

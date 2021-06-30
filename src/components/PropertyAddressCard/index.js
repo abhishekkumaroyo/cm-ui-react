@@ -7,6 +7,7 @@ export default function PropertyAddressCard(props) {
     useEffect(() => {
         if (Object.prototype.hasOwnProperty.call(props.property, 'locationInfo')) {
             let tempObject = {};
+
             const locationInfo = props.property.locationInfo;
             if (Object.prototype.hasOwnProperty.call(locationInfo, 'geoLocation')) {
                 tempObject['Latitude'] = locationInfo.geoLocation.latitude;

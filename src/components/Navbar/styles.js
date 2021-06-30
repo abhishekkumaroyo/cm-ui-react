@@ -74,15 +74,3 @@ export const DropDownMenu = styled.div`
     display: flex;
     background-image: url(../Icons/icons);
 `;
-
-export const NavLeft = styled.div`
-    display: flex;
-    left: 0;
-`;
-
-export const NavRight = styled.div`
-    display: flex;
-    right: 0;
-    position: fixed;
-    margin: 2px;
-`;
